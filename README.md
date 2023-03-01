@@ -1,4 +1,4 @@
-# <Departure>
+# Departure
 
 ## サイト概要
 ### サイトテーマ
