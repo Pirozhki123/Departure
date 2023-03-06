@@ -3,13 +3,13 @@
 one:
   visitor_id: 1
   visited_id: 1
-  favorite: 
-  comment: 
-  relationship: 
+  favorite: one
+  comment: one
+  relationship: one
 
 two:
   visitor_id: 1
   visited_id: 1
-  favorite: 
-  comment: 
-  relationship: 
+  favorite: two
+  comment: two
+  relationship: two

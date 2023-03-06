@@ -3,9 +3,9 @@ class CreateNotifications < ActiveRecord::Migration[6.1]
     create_table :notifications do |t|
       t.integer :visitor_id
       t.integer :visited_id
-      t.reference :favorite
-      t.reference :comment
-      t.reference :relationship
+      t.references :favorite, null: false, foreign_key: true
+      t.references :comment, null: false, foreign_key: true
+      t.references :relationship, null: false, foreign_key: true
 
       t.timestamps
     end

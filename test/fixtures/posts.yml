@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  customer: 
-  place: 
+  customer: one
+  place: one
   Introduction: MyString
 
 two:
-  customer: 
-  place: 
+  customer: two
+  place: two
   Introduction: MyString
