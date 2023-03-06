@@ -1,0 +1,2 @@
+class TagRelation < ApplicationRecord
+end
