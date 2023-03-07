@@ -9,4 +9,5 @@ class Customer < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :rooms, dependent: :destroy
+  has_one_attached :image
 end
