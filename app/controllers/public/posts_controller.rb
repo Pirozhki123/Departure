@@ -29,7 +29,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
-    @post.place_id = '1'
+    @post.place_id = '1'#これがエラーの原因。Placeに対応したデータがないとエラーが出る
     #場所の保存処理
     # place_present = Place.where(place_name: :place)
     # if place_present.blank?
