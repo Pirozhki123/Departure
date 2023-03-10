@@ -38,9 +38,9 @@ class Public::PostsController < ApplicationController
     # end
     # @post.place_id = place.id
     # #タグの保存処理
-    # tag_list = params[:post][:tag].delete(' ').delete('　').split(',')#送られたtag情報を「,」で区切ってスペースを削除
+    tag_list = params[:post][:tag].delete(' ').delete('　').split(',')#送られたtag情報を「,」で区切ってスペースを削除
     if @post.save
-      # @post.save_tags(tag_list) #save_tagsメソッドを実行（モデルに記載）
+      @post.save_tags(tag_list) #save_tagsメソッドを実行（モデルに記載）
       redirect_to root_path, notice: "投稿が完了しました"
     end
   end
