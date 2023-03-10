@@ -29,14 +29,19 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
-    @post.place_id = '1'#これがエラーの原因。Placeに対応したデータがないとエラーが出る
+    # @post.place_id = '1'#これがエラーの原因。Placeに対応したデータがないとエラーが出る
     #場所の保存処理
-    # place_present = Place.where(place_name: :place)
-    # if place_present.blank?
-    #   @post.place = Place.new
-    #   place.place_name = params[:post][:place]
-    # end
-    # @post.place_id = place.id
+    place_name = params[:post][:place]
+    place_present = Place.where(place_name: place_name)
+    if place_present.blank?
+      @post.place = Place.new
+      @post.place.place_name = place_name
+      place_id = @post.place.id
+    else
+      place = Place.where(place_name: place_name).order('created_at DESC').first
+      place_id = place.id
+    end
+    @post.place_id = place_id
     # #タグの保存処理
     tag_list = params[:post][:tag].delete(' ').delete('　').split(',')#送られたtag情報を「,」で区切ってスペースを削除
     if @post.save
