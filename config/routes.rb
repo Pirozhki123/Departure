@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+
+  root to: 'public/homes#top'
+
+  namespace :public do
+    resources :posts, only: [:index, :show, :edit, :create, :update, :destroy]
+    get "search" => "searches#search"
+  end
+
+  namespace :public do
+  end
+
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
