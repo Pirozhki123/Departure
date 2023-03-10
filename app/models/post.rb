@@ -26,12 +26,26 @@ class Post < ApplicationRecord
     end
   end
 
-def get_profile_image(width, height)
-  unless profile_image.attached?
-    file_path = Rails.root.join('app/assets/images/no_image.jpg')
-    profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+  def get_profile_image(width, height)
+    unless profile_image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    profile_image.variant(resize_to_limit: [width, height]).processed
   end
-  profile_image.variant(resize_to_limit: [width, height]).processed
-end
+
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @post = Post.where("introduction LIKE?", "#{word}")
+    elsif search == "forward_match"
+      @post = Post.where("introduction LIKE?", "#{word}%")
+    elsif search == "backward_match"
+      @post = Post.where("introduction LIKE?", "%#{word}")
+    elsif search == "partial_match"
+      @post = Post.where("introduction LIKE?", "%#{word}%")
+    else
+      @post = Post.all
+    end
+  end
 
 end
