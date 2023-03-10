@@ -1,2 +1,11 @@
-<h1>Public::Posts#edit</h1>
-<p>Find me in app/views/public/posts/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <%= render 'layouts/errors', obj: @post %>
+    <div class=".col-md-3">
+      <h1>投稿編集</h1>
+    </div>
+    <div class=".col-md-3">
+      <%= render 'public/posts/form', post: @post %>
+    </div>
+  </div>
+</div>
