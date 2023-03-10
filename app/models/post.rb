@@ -7,6 +7,10 @@ class Post < ApplicationRecord
   has_many :tags, through: :tag_relations, dependent: :destroy
   has_one_attached :image
 
+  validates :customer_id, presence: true
+  validates :place_id, presence: true
+  validates :introduction, presence: true
+
   def save_tags(tags) #既存のタグが被らないようにデータベースに保存
     current_tags = self.tags.pluck(:tag) unless self.tags.nil? #:tagが空じゃなければ配列を取得
     old_tags = current_tags - tags
