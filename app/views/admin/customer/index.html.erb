@@ -1,0 +1,17 @@
+<% @customers.each do |customer| %>
+  <div class="card" >
+    <% if customer.image.attached? %>
+      <%= image_tag post.image, size: "192x108" %>
+    <% else %>
+      <%= image_tag 'no_image', size: "192x108" %>
+    <% end %>
+    <div class="card-body">
+      <%= link_to admin_customer_path(customer) do %>
+        <%= customer.name %>
+        <%= customer.email %>
+        <%= customer.is_deleted %>
+        <%= customer.private %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

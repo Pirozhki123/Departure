@@ -1,0 +1,11 @@
+<% if post.favorited_by?(current_customer) %> <!--favが押されているか確認して押されているならば以下の処理を実行（bookモデルで記載したfavorited_by?メソッドを使用-->
+  <%= link_to public_post_favorites_path(post), method: :delete do %> <!--クリックするとfavコントローラーのdestroyを実行-->
+    <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i> <!--赤色のハートを表示-->
+    <%= post.favorites.count %> いいね <!--いいね数を表示-->
+  <% end %>
+<% else %> <!--いいねが押されていなければ以下の処理を実行-->
+  <%= link_to public_post_favorites_path(post), method: :post do %> <!--クリックするとfavコントローラーのcreateを実行-->
+    <i class="fas fa-heart" aria-hidden="true"></i> <!--色のないハートを表示-->
+    <%= post.favorites.count %> いいね <!--いいね数を表示-->
+  <% end %>
+<% end %>

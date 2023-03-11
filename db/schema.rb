@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_06_093542) do
+ActiveRecord::Schema.define(version: 2023_03_07_015334) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,6 +52,16 @@ ActiveRecord::Schema.define(version: 2023_03_06_093542) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "post_id", null: false
+    t.string "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_comments_on_customer_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -67,6 +77,108 @@ ActiveRecord::Schema.define(version: 2023_03_06_093542) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "entries", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_entries_on_customer_id"
+    t.index ["room_id"], name: "index_entries_on_room_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_favorites_on_customer_id"
+    t.index ["post_id"], name: "index_favorites_on_post_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "room_id", null: false
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_messages_on_customer_id"
+    t.index ["room_id"], name: "index_messages_on_room_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id"
+    t.integer "visited_id"
+    t.integer "favorite_id", null: false
+    t.integer "comment_id", null: false
+    t.integer "relationship_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index ["favorite_id"], name: "index_notifications_on_favorite_id"
+    t.index ["relationship_id"], name: "index_notifications_on_relationship_id"
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.string "place_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "place_id", null: false
+    t.string "introduction"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_posts_on_customer_id"
+    t.index ["place_id"], name: "index_posts_on_place_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "following_id"
+    t.integer "follower_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_rooms_on_customer_id"
+  end
+
+  create_table "tag_relations", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_tag_relations_on_post_id"
+    t.index ["tag_id"], name: "index_tag_relations_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "customers"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "entries", "customers"
+  add_foreign_key "entries", "rooms"
+  add_foreign_key "favorites", "customers"
+  add_foreign_key "favorites", "posts"
+  add_foreign_key "messages", "customers"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "notifications", "comments"
+  add_foreign_key "notifications", "favorites"
+  add_foreign_key "notifications", "relationships"
+  add_foreign_key "posts", "customers"
+  add_foreign_key "posts", "places"
+  add_foreign_key "rooms", "customers"
+  add_foreign_key "tag_relations", "posts"
+  add_foreign_key "tag_relations", "tags"
 end
