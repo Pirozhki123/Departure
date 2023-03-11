@@ -1,4 +1,6 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_customer!
+
   def index
   end
 
@@ -16,6 +18,7 @@ class Public::PostsController < ApplicationController
     if place_present.blank?
       @post.place = Place.new
       @post.place.place_name = place_name
+      @post.place.save
       place_id = @post.place.id
     else
       place = Place.where(place_name: place_name).order('created_at DESC').first
@@ -42,6 +45,7 @@ class Public::PostsController < ApplicationController
     if place_present.blank?
       @post.place = Place.new
       @post.place.place_name = place_name
+      @post.place.save
       place_id = @post.place.id
     else
       place = Place.where(place_name: place_name).order('created_at DESC').first

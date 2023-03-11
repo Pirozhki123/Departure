@@ -3,7 +3,7 @@
     <h2>Users search for "<%="#{@word}"%>"</h2>
     <%= render 'users/index', customers: @customers %>
   <% elsif @range == "Word" %>
-    <h2>Books search for "<%="#{@word}"%>"</h2>
-    <%= render 'public/posts/timeline', books: @books %>
+    <h2>Posts search for "<%="#{@word}"%>"</h2>
+    <%= render 'public/posts/timeline', posts: @posts %>
   <% end %>
 </table>
