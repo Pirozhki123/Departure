@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   root to: 'public/homes#top'
 
   namespace :public do
-    resources :posts, only: [:index, :show, :edit, :create, :update, :destroy]
+    resources :posts, only: [:index, :show, :edit, :create, :update, :destroy] do
+      resource :favorites, only: [:create, :destroy]
+    end
     get "search" => "searches#search"
   end
 
