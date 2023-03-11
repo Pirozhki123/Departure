@@ -4,6 +4,6 @@
     <%= render 'users/index', customers: @customers %>
   <% elsif @range == "Word" %>
     <h2>Posts search for "<%="#{@word}"%>"</h2>
-    <%= render 'public/posts/timeline', posts: @posts %>
+    <%= render 'public/posts/index', posts: @posts %>
   <% end %>
 </table>

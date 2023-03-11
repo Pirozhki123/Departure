@@ -1,0 +1,11 @@
+<% if customer.image.attached? %>
+  <%= image_tag post.image, size: "192x108" %>
+<% else %>
+  <%= image_tag 'no_image', size: "192x108" %>
+<% end %>
+<%= link_to admin_customer_path(customer) do %>
+  <%= customer.name %>
+  <%= customer.email %>
+  <%= customer.is_deleted %>
+  <%= customer.private %>
+<% end %>
