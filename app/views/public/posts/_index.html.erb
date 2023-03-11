@@ -19,6 +19,7 @@
       <p class="card-text">
         <%= post.introduction %>
       </p>
+      <%= render 'public/favorites/btn', post: post %>
       <% if post.customer == current_customer %>
         <%= link_to "編集", edit_public_post_path(post), class: 'btn btn-secondary' %>
         <%= link_to "削除", public_post_path(post), method: :delete, class: 'btn btn-danger', "data-confirm" => "本当に削除しますか？" %>
