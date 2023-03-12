@@ -3,7 +3,7 @@
     <div class="col-md-8 offset-md-1">
       <h2>フォローユーザー</h2>
       <% if @customers.present? %>
-        <%= render 'index',customers: @customers %>
+        <%= render 'public/customers/index',customers: @customers %>
       <% else %>
         <a>ユーザーはいません</a>
       <% end %>

@@ -9,11 +9,11 @@ class Customer < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :rooms, dependent: :destroy
-  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :followings, through: :follower, source: :followed
-  has_many :followed, class_name: "Relationship", foreign_key: "following_id", dependent: :destroy
-  has_many :followers, through: :followed, source: :follower
-  has_one_attached :image
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followers, through: :reverse_of_relationships, source: :follower
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followings, through: :relationships, source: :followed
+  has_one_attached :profile_image
 
   validates :email, presence: true
   validates :name, presence: true
@@ -32,8 +32,16 @@ class Customer < ApplicationRecord
     end
   end
 
-  def is_followed_by?(user)
-    followed.find_by(follower_id: user.id).present?
+  def follow(customer)
+    relationships.create(followed_id: customer.id) #渡されたユーザーのIDでフォローをfollowed_idをクリエイト
+  end
+
+  def unfollow(customer)
+    relationships.find_by(followed_id: customer.id).destroy #渡されたユーザーのIDでfollowed_idを探して削除
+  end
+
+  def following?(customer)
+    followings.include?(customer) #自分がフォローしている人から渡されたユーザー情報を呼び出す？
   end
 
   def get_profile_image(width, height)

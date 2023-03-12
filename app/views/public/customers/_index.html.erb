@@ -7,26 +7,26 @@
     </tr>
   </thead>
   <tbody>
-    <% customers.each do |user| %>
+    <% customers.each do |customer| %>
       <tr>
-        <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
-        <td><%= user.name %></td>
-        <td>フォロー数 : <%= user.follower.count %></td>
-        <td>フォロワー数 : <%= user.followed.count %></td>
+        <td><%= image_tag customer.get_profile_image(50, 50) %></td>
+        <td><%= customer.name %></td>
+        <td>フォロー数 : <%= customer.followings.count %></td>
+        <td>フォロワー数 : <%= customer.followers.count %></td>
         <td>
-          <% if user != current_user %>
-            <% if user.is_followed_by?(current_user) %>
-              <%= link_to public_customer_relationships_path(user), method: :delete do %>
-                フォロー外す
+          <% if customer != current_customer %>
+            <% if current_customer.following?(customer) %>
+              <%= link_to public_customer_relationships_path(customer), method: :delete do %>
+                <button class="btn btn-info">フォロー外す</button>
               <% end %>
             <% else %>
-              <%= link_to public_customer_relationships_path(user), method: :post do %>
-                フォローする
+              <%= link_to public_customer_relationships_path(customer), method: :post do %>
+                <button class="btn btn-success">フォローする</button>
               <% end %>
             <% end %>
           <% end %>
         </td>
-        <td><%= link_to 'Show', user %></td>
+
       </tr>
     <% end %>
   </tbody>
