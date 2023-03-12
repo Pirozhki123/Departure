@@ -1,9 +1,13 @@
 <% posts.each do |post| %>
   <div class="card" >
+    <%= link_to  public_post_path(post) do %>
+
     <% if post.image.attached? %>
       <%= image_tag post.image, size: "192x108" %>
     <% else %>
       <%= image_tag 'no_image', size: "192x108" %>
+    <% end %>
+
     <% end %>
     <div class="card-body">
       <h5 class="card-title">
@@ -11,19 +15,25 @@
       </h5>
       <% post_tags = post.tags %>
       <% post_tags.each do |tag| %>
-        <h6 class="card-subtitle">
-          <%= tag.tag %>
-        </h6>
-        <!--<= link_to tag.tag, search_path(word: tag.tag, range:"tag", search: "perfect_match") %>-->
+        <%= link_to  public_search_path(word: tag.tag, range:"tag", search: "perfect_match") do %>
+          <%= tag.tag %><%= "(#{tag.posts.count})" %>
+        <% end %>
       <% end %>
       <p class="card-text">
         <%= post.introduction %>
       </p>
-      <%= render 'public/favorites/btn', post: post %>
-      <% if post.customer == current_customer %>
-        <%= link_to "編集", edit_public_post_path(post), class: 'btn btn-secondary' %>
-        <%= link_to "削除", public_post_path(post), method: :delete, class: 'btn btn-danger', "data-confirm" => "本当に削除しますか？" %>
-      <% end %>
+      <div class="card-item">
+        <%= link_to public_customer_path(post.customer) do %>
+          <%= post.customer.name %>
+        <% end %>
+      </div>
+      <div class="card-item">
+        <%= render 'public/favorites/btn', post: post %>
+        <% if post.customer == current_customer %>
+          <%= link_to "編集", edit_public_post_path(post), class: 'btn btn-secondary' %>
+          <%= link_to "削除", public_post_path(post), method: :delete, class: 'btn btn-danger', "data-confirm" => "本当に削除しますか？" %>
+        <% end %>
+      </div>
     </div>
   </div>
 <% end %>
