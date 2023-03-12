@@ -26,5 +26,22 @@
     <div class="profile-group">
       <%= link_to "いいね一覧", favorite_posts_public_customer_path(params[:id]), class: 'btn btn-success' %>
     </div>
+    <div class="profile-group">
+      <% if @customer != current_customer %>
+        <% if @customer.is_followed_by?(current_customer) %>
+          <%= link_to public_customer_relationships_path(@customer), method: :delete do %>
+            <button class="btn btn-info">フォロー外す</button>
+          <% end %>
+        <% else %>
+          <%= link_to public_customer_relationships_path(@customer), method: :post do %>
+            <button class="btn btn-success">フォローする</button>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= link_to edit_public_customer_path(@customer), class: "btn btn-outline-secondary btn-block" do %>
+          <i class="fas fa-user-cog"></i>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

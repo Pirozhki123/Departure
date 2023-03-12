@@ -22,6 +22,16 @@ class Public::CustomersController < ApplicationController
     @post = Post.new
   end
 
+  def followings
+    customer = Customer.find(params[:id])
+    @customer = customer.followings #customerに結びついているフォロー全員を取得
+  end
+
+  def followers
+    customer = Customer.find(params[:id])
+    @customer = customer.followers #customerに結びついているフォロワー全員を取得
+  end
+
   private
 
   def customer_params

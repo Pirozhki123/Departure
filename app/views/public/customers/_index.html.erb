@@ -1,0 +1,33 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>name</th>
+      <th colspan="6"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% customers.each do |user| %>
+      <tr>
+        <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
+        <td><%= user.name %></td>
+        <td>フォロー数 : <%= user.follower.count %></td>
+        <td>フォロワー数 : <%= user.followed.count %></td>
+        <td>
+          <% if user != current_user %>
+            <% if user.is_followed_by?(current_user) %>
+              <%= link_to public_customer_relationships_path(user), method: :delete do %>
+                フォロー外す
+              <% end %>
+            <% else %>
+              <%= link_to public_customer_relationships_path(user), method: :post do %>
+                フォローする
+              <% end %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', user %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
