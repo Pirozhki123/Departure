@@ -11,6 +11,9 @@ class Customer < ApplicationRecord
   has_many :rooms, dependent: :destroy
   has_one_attached :image
 
+  validates :email, presence: true
+  validates :name, presence: true
+
   def self.looks(search, word)
     if search == "perfect_match"
       @customer = Customer.where("name LIKE?", "#{word}")

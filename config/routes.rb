@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
     end
 
-    resources :customers, only: [:show, :edit] do
+    resources :customers, only: [:show, :edit, :update] do
       member do
         get 'favorite_posts'
       end

@@ -4,6 +4,13 @@ class Public::CustomersController < ApplicationController
   end
 
   def edit
+    @customer = Customer.find(params[:id])
+  end
+
+  def update
+    @customer = Customer.find(params[:id])
+    @customer.update(customer_params)
+    redirect_to public_customer_path(@customer)
   end
 
   def favorite_posts
@@ -14,4 +21,11 @@ class Public::CustomersController < ApplicationController
 
     @post = Post.new
   end
+
+  private
+
+  def customer_params
+    params.require(:customer).permit(:name, :email, :introduction, :private, :image)
+  end
+
 end
