@@ -14,8 +14,6 @@ class Public::RelationshipsController < ApplicationController
   end
 
   def followings
-    # customer = Customer.find(params[:customer_id])
-    # @customer = customer.followings #customerに結びついているフォロー全員を取得
     customer = Customer.find(params[:customer_id]) #Userモデルからuser_idが一致するものを見つけてuserに代入
 		@customers = customer.followings #userのフォローしている人一覧を@usersに代入
   end
@@ -23,8 +21,6 @@ class Public::RelationshipsController < ApplicationController
   def followers
     customer = Customer.find(params[:customer_id]) #Userモデルからuser_idが一致するものを見つけてuserに代入
 		@customers = customer.followers #userのフォローされている人一覧を@usersに代入
-    # customer = Customer.find(params[:customer_id])
-    # @customer = customer.followers #customerに結びついているフォロワー全員を取得
   end
 
 end
