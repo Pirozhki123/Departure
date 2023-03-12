@@ -1,19 +1,23 @@
-<div class="form-group">
+<div class="profile-group">
   <% if @customer.image.attached? %>
     <%= image_tag @customer.image, size: "192x108" %>
   <% else %>
     <%= image_tag 'no_image', size: "192x108" %>
   <% end %>
 </div>
-<div class="form-group">
+<div class="profile-group">
   <h5>ユーザーネーム</h5>
   <%= @customer.name %>
 </div>
-<div class="form-group">
+<div class="profile-group">
   <h5>メールアドレス</h5>
   <%= @customer.email %>
 </div>
-<div class="form-group">
+<div class="profile-group">
+  <h5>紹介文</h5>
+  <%= @customer.introduction %>
+</div>
+<div class="profile-group">
   <h5>非公開設定</h5>
   <% if @customer.private == false %>
     <p>公開</p>
