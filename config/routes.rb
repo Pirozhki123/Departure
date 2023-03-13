@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :public do
     resources :posts, only: [:index, :show, :edit, :create, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
+      resources :comments, only: [:create, :desttoy]
     end
 
     resources :customers, only: [:show, :edit, :update] do

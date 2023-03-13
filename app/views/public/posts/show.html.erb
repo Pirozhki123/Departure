@@ -29,5 +29,19 @@
           <%= link_to "削除", public_post_path(@post), method: :delete, class: 'btn btn-danger', "data-confirm" => "本当に削除しますか？" %>
         <% end %>
       </div>
+      <div class="card-item">
+        <% @post.comments.each do |comment| %>
+          <%= image_tag comment.customer.get_profile_image(100, 100) %>
+          <%= comment.customer.name %>
+          <%= comment.created_at.strftime('%Y%m%d') %>
+          <%= comment.body %>
+        <% end %>
+      </div>
+      <div class="card-item">
+        <%= form_with model: @comment, url: public_post_comments_path(@post) do |f| %>
+          <%= f.text_area :body, rows: '5', placeholder: "コメント" %>
+          <%= f.submit "送信" %>
+        <% end %>
+      </div>
     </div>
   </div>
