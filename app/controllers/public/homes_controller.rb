@@ -3,7 +3,9 @@ class Public::HomesController < ApplicationController
 
   def top
     @post = Post.new
-    @posts = Post.all
+    customer_ids = current_customer.followings.pluck(:id)
+    customer_ids.push(current_customer.id)
+    @posts = Post.where(customer_id: customer_ids).order(created_at: :desc)
     @tag_list = @post.tags.pluck(:tag).join(',')
   end
 end
