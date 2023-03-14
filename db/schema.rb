@@ -53,12 +53,11 @@ ActiveRecord::Schema.define(version: 2023_03_12_082221) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "post_id", null: false
     t.string "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_comments_on_customer_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
@@ -79,30 +78,27 @@ ActiveRecord::Schema.define(version: 2023_03_12_082221) do
   end
 
   create_table "entries", force: :cascade do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "room_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_entries_on_customer_id"
     t.index ["room_id"], name: "index_entries_on_room_id"
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_favorites_on_customer_id"
     t.index ["post_id"], name: "index_favorites_on_post_id"
   end
 
   create_table "messages", force: :cascade do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "room_id", null: false
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_messages_on_customer_id"
     t.index ["room_id"], name: "index_messages_on_room_id"
   end
 
@@ -131,7 +127,6 @@ ActiveRecord::Schema.define(version: 2023_03_12_082221) do
     t.string "introduction"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_posts_on_customer_id"
     t.index ["place_id"], name: "index_posts_on_place_id"
   end
 
@@ -143,10 +138,9 @@ ActiveRecord::Schema.define(version: 2023_03_12_082221) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_rooms_on_customer_id"
   end
 
   create_table "tag_relations", force: :cascade do |t|
@@ -166,20 +160,14 @@ ActiveRecord::Schema.define(version: 2023_03_12_082221) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comments", "customers"
   add_foreign_key "comments", "posts"
-  add_foreign_key "entries", "customers"
   add_foreign_key "entries", "rooms"
-  add_foreign_key "favorites", "customers"
   add_foreign_key "favorites", "posts"
-  add_foreign_key "messages", "customers"
   add_foreign_key "messages", "rooms"
   add_foreign_key "notifications", "comments"
   add_foreign_key "notifications", "favorites"
   add_foreign_key "notifications", "relationships"
-  add_foreign_key "posts", "customers"
   add_foreign_key "posts", "places"
-  add_foreign_key "rooms", "customers"
   add_foreign_key "tag_relations", "posts"
   add_foreign_key "tag_relations", "tags"
 end

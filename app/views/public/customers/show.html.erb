@@ -1,39 +1,41 @@
 <div class="container">
   <div class="row">
-    <div class="profile-group">
+    <div class="profile_left col-md-6">
+
+    <div class="profile-group customer_image">
       <% if @customer.profile_image.attached? %>
-        <%= image_tag @customer.profile_image, size: "192x108" %>
+        <%= image_tag @customer.profile_image, size: "192x108", class: "img-fluid" %>
       <% else %>
-        <%= image_tag 'no_image', size: "192x108" %>
+        <%= image_tag 'no_image', size: "192x108", class: "img-fluid float-right" %>
       <% end %>
     </div>
-    <div class="profile-group">
-      <%= @customer.name %>(#<%= @customer.id %>)
+
     </div>
-    <div class="profile-group">
-      <% if @customer.private == false %>
-        <p>公開</p>
-      <% else %>
-        <p>非公開</p>
-      <% end %>
+    <div class="profile_right col-md-6">
+
+    <div class="profile-group customer_name">
+      <h5>
+        <%= @customer.name %>#<%= @customer.id %>
+        <% if @customer.private == true %>
+          <i class="fa-regular fa-lock"></i>
+        <% end %>
+      </h5>
     </div>
-    <div class="profile-group">
-      <%= @customer.introduction %>
+    <div class="profile-group customer_introduction">
+      <p>
+        <%= @customer.introduction %>
+      </p>
     </div>
-    <div class="profile-group">
-      <%= link_to "Edit", edit_public_customer_path, class: 'btn btn-success' %>
+    <div class="profile-group profile_follow">
+      <%= link_to public_customer_followings_path(@customer), class: 'mr-2' do %>
+        フォロー : <%= @customer.followings.count %>
+      <% end %><br>
+      <%= link_to public_customer_followers_path(@customer), class: 'mr-2' do %>
+        フォロワー : <%= @customer.followers.count %>
+      <% end %><br>
+      <%= link_to "いいね一覧", favorite_posts_public_customer_path(params[:id]), class: 'mr-2' %>
     </div>
-    <div class="profile-group">
-      <%= link_to "いいね一覧", favorite_posts_public_customer_path(params[:id]), class: 'btn btn-success' %>
-    </div>
-      <%= link_to public_customer_followings_path(@customer) do%>
-        フォロー数 : <%= @customer.followings.count %>
-      <% end %>
-      <%= link_to public_customer_followers_path(@customer) do%>
-        フォロワー数 : <%= @customer.followers.count %>
-      <% end %>
-    </div>
-    <div class="profile-group">
+    <div class="profile-group profile_follow">
       <% if @customer != current_customer %>
         <% if current_customer.following?(@customer) %>
           <%= link_to public_customer_relationships_path(@customer), method: :delete do %>
@@ -50,6 +52,10 @@
         <% end %>
       <% end %>
     </div>
-    <%= render 'public/posts/index', posts: @posts %>
+
+    </div>
+
+
   </div>
+  <%= render 'public/posts/index', posts: @posts %>
 </div>
