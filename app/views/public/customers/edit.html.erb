@@ -1,7 +1,7 @@
 <%= form_with model: @customer, url: public_customer_path do |f| %>
   <div class="profile-group">
-    <% if @customer.image.attached? %>
-      <%= image_tag @customer.image, size: "192x108" %>
+    <% if @customer.profile_image.attached? %>
+      <%= image_tag @customer.profile_image, size: "192x108" %>
     <% else %>
       <%= image_tag 'no_image', size: "192x108" %>
     <% end %>

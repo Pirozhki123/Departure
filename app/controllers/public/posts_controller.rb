@@ -2,6 +2,9 @@ class Public::PostsController < ApplicationController
   before_action :authenticate_customer!
 
   def index
+    @post = Post.new
+    @posts = Post.all
+    @tag_list = @post.tags.pluck(:tag).join(',')
   end
 
   def show

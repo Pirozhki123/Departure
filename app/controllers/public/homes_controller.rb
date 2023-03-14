@@ -8,4 +8,7 @@ class Public::HomesController < ApplicationController
     @posts = Post.where(customer_id: customer_ids).order(created_at: :desc) #取得したユーザーidの投稿を取得
     @tag_list = @post.tags.pluck(:tag).join(',')
   end
+
+  def about
+  end
 end
