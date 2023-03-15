@@ -6,14 +6,14 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="body">
     <header>
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
-        <a class="navbar-brand" href="/">Departure</a>
+      <nav class="navbar navbar-expand-sm navbar-dark mb-3">
+        <a class="navbar-brand" href="/"><h3>Departure</h3></a>
         <div class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
             <li class="nav-item ml-2">
@@ -49,7 +49,6 @@
           </ul>
         </div>
       </nav>
-
     </header>
     <%=yield %>
   </body>

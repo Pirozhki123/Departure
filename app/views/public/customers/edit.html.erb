@@ -1,35 +1,41 @@
-<%= form_with model: @customer, url: public_customer_path do |f| %>
-  <div class="profile-group">
-    <% if @customer.profile_image.attached? %>
-      <%= image_tag @customer.profile_image, size: "192x108" %>
-    <% else %>
-      <%= image_tag 'no_image', size: "192x108" %>
-    <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <%= form_with model: @customer, url: public_customer_path do |f| %>
+        <div class="profile-group row">
+          <dt class="col-2 text-right"></dt>
+          <dd class="col-7"><%= image_tag @customer.get_profile_image(192, 108), class: "img-thumbnail" %></dd>
+        </div>
+        <div class="form-group row ">
+          <dt class="col-2 text-right"><%= f.label :profile_image, "プロフィール画像" %></dt>
+          <dd class="col-7"><%= f.file_field :profile_image, accept: "image/*" %></dd>
+        </div>
+        <div class="profile-group row pb-3">
+          <dt class="col-2 text-right"><%= f.label :name, "ユーザーネーム" %></dt>
+          <dd class="col-7"><%= f.text_field :name %></dd>
+        </div>
+        <div class="profile-group row pb-3">
+          <dt class="col-2 text-right"><%= f.label :email, "メールアドレス" %></dt>
+          <dd class="col-7"><%= f.text_field :email %></dd>
+        </div>
+        <div class="profile-group row pb-3">
+          <dt class="col-2 text-right"><%= f.label :introduction, "自己紹介" %></dt>
+          <dd class="col-7"><%= f.text_area :introduction %></dd>
+        </div>
+        <div class="profile-group row pb-3">
+          <dt class="col-2 text-right"><%= f.label :private, "非公開設定" %></dt>
+          <dd class="col-7">
+            <%= f.radio_button :private, :false %>
+            <%= f.label :private, "公開", {value: :false, style: "display: inline-block;"} %>
+            <%= f.radio_button :private, :true %>
+            <%= f.label :private, "非公開", {value: :true, style: "display: inline-block;"} %>
+          </dd>
+        </div>
+        <div class="form-group row pb-3">
+          <dt class="col-2 text-right"></dt>
+          <dd class="col-7"><%= f.submit class: 'btn btn-success' %></dd>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.file_field :image, accept: "image/*" %>
-  </div>
-  <div class="profile-group">
-    <h5>ユーザーネーム</h5>
-    <%= f.text_field :name %>
-  </div>
-  <div class="profile-group">
-    <h5>メールアドレス</h5>
-    <%= f.text_field :email %>
-  </div>
-
-  <div class="profile-group">
-    <h5>紹介文</h5>
-    <%= f.text_field :introduction %>
-  </div>
-  <div class="profile-group">
-    <h5>非公開設定</h5>
-    <%= f.radio_button :private, :false %>
-    <%= f.label :private, "公開", {value: :false, style: "display: inline-block;"} %>
-    <%= f.radio_button :private, :true %>
-    <%= f.label :private, "非公開", {value: :true, style: "display: inline-block;"} %>
-  </div>
-  <div class="form-group">
-    <%= f.submit class: 'btn btn-success' %>
-  </div>
-<% end %>
+</div>
