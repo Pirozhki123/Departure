@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row ">
-    <div class="mt-2 mb-2 shadow-sm text-center" >
+    <div class="mt-2 mb-2 card shadow-sm text-center" >
       <% if @post.image.attached? %>
         <%= image_tag @post.image, class: 'img-fluid' %>
       <% else %>
@@ -18,32 +18,24 @@
               <%= tag.tag %><%= "(#{tag.posts.count})" %>
             <% end %>
           <% end %>
-        </div>
-        <p class="text">
-          <%= @post.introduction %>
-        </p>
-        <div class="card-item">
-          <%= link_to public_customer_path(@post.customer) do %>
-            <p>
-              <%= image_tag @post.customer.get_profile_image(25, 25), class: "img-thumbnail" %>
-              <%= @post.customer.name %>#<%= @post.customer.id %>
-            </p>
-          <% end %>
-        </div>
-        <div class="card-item">
+          <%= link_to "タグ編集", edit_public_post_path(@post), class: 'btn btn-secondary btn-sm' %>
           <% if @post.customer == current_customer %>
-            <%= link_to "編集", edit_public_post_path(@post), class: 'btn btn-secondary' %>
-            <%= link_to "削除", public_post_path(@post), method: :delete, class: 'btn btn-danger', "data-confirm" => "本当に削除しますか？" %>
+            <%= link_to "投稿削除", public_post_path(@post), method: :delete, class: 'btn btn-danger btn-sm', "data-confirm" => "本当に削除しますか？" %>
           <% end %>
         </div>
         <div class="card-item pb-2">
-          <h5>コメント欄</h5>
+          <%= @post.introduction %>
+          <%= link_to public_customer_path(@post.customer), class: 'pl-2' do %>
+              <%= image_tag @post.customer.get_profile_image(25, 25), class: "img-thumbnail" %><%= @post.customer.name %>#<%= @post.customer.id %>
+          <% end %>
+        </div>
+        <div class="card-item pb-2">
           <% @post.comments.each do |comment| %>
             <div class="comment pb-2">
-              <%= comment.body %>
-              <%= link_to public_customer_path(comment.customer) do %>
+              <%= link_to public_customer_path(comment.customer), class: 'pr-2' do %>
                 <%= image_tag comment.customer.get_profile_image(25, 25), class: "img-thumbnail" %>
               <% end %>
+              <%= comment.body %>
             </div>
           <% end %>
         </div>

@@ -1,62 +1,54 @@
 <div class="container">
   <div class="row">
     <div class="profile_left col-md-6">
-
-    <div class="profile-group customer_image">
-      <!--<= image_tag @customer.get_profile_image(192, 108), class: "img-thumbnail float-right" %>-->
-      <% if @customer.profile_image.attached? %>
-        <%= image_tag @customer.profile_image, size: "192x108", class: "img-fluid float-right" %>
-      <% else %>
-        <%= image_tag 'no_image', size: "192x108", class: "img-fluid float-right" %>
-      <% end %>
-    </div>
-
-    </div>
-    <div class="profile_right col-md-6">
-
-    <div class="profile-group customer_name">
-      <h5>
-        <%= @customer.name %>#<%= @customer.id %>
-        <% if @customer.private == true %>
-          <i class="fa-regular fa-lock"></i>
-        <% end %>
-      </h5>
-    </div>
-    <div class="profile-group customer_introduction">
-      <p>
-        <%= @customer.introduction %>
-      </p>
-    </div>
-    <div class="profile-group profile_follow">
-      <%= link_to public_customer_followings_path(@customer), class: 'mr-2' do %>
-        フォロー : <%= @customer.followings.count %>
-      <% end %><br>
-      <%= link_to public_customer_followers_path(@customer), class: 'mr-2' do %>
-        フォロワー : <%= @customer.followers.count %>
-      <% end %><br>
-      <%= link_to "いいね一覧", favorite_posts_public_customer_path(params[:id]), class: 'mr-2' %>
-    </div>
-    <div class="profile-group profile_follow">
-      <% if @customer != current_customer %>
-        <% if current_customer.following?(@customer) %>
-          <%= link_to public_customer_relationships_path(@customer), method: :delete do %>
-            <button class="btn btn-info">フォロー外す</button>
+      <div class="profile-group customer_image">
+          <!--<= image_tag @customer.get_profile_image(192, 108), class: "img-thumbnail float-right" %>-->
+          <% if @customer.profile_image.attached? %>
+            <%= image_tag @customer.profile_image, size: "192x108", class: "img-fluid float-right" %>
+          <% else %>
+            <%= image_tag 'no_image', size: "192x108", class: "img-fluid float-right" %>
           <% end %>
-        <% else %>
-          <%= link_to public_customer_relationships_path(@customer), method: :post do %>
-            <button class="btn btn-success">フォローする</button>
+        </div>
+      </div>
+      <div class="profile_right col-md-6">
+        <div class="profile-group customer_name">
+        <h5>
+          <%= @customer.name %>#<%= @customer.id %>
+          <% if @customer.private == true %>
+            <i class="fa-regular fa-lock"></i>
           <% end %>
-        <% end %>
-      <% else %>
-        <%= link_to edit_public_customer_path(@customer), class: "btn btn-outline-secondary btn-block w-25" do %>
-          <i class="fas fa-user-cog"></i>
-        <% end %>
-      <% end %>
+          <% if @customer != current_customer %>
+            <% if current_customer.following?(@customer) %>
+              <%= link_to public_customer_relationships_path(@customer), method: :delete do %>
+                <button class="btn btn-info btn-sm">フォロー外す</button>
+              <% end %>
+            <% else %>
+              <%= link_to public_customer_relationships_path(@customer), method: :post do %>
+                <button class="btn btn-success btn-sm">フォローする</button>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= link_to edit_public_customer_path(@customer), class: "btn btn-outline-secondary btn-block btn-sm w-25" do %>
+              <i class="fas fa-user-cog"></i>
+            <% end %>
+          <% end %>
+        </h5>
+      </div>
+      <div class="profile-group customer_introduction">
+        <p>
+          <%= @customer.introduction %>
+        </p>
+      </div>
+      <div class="profile-group profile_follow">
+        <%= link_to public_customer_followings_path(@customer), class: 'mr-2' do %>
+          フォロー : <%= @customer.followings.count %>
+        <% end %><br>
+        <%= link_to public_customer_followers_path(@customer), class: 'mr-2' do %>
+          フォロワー : <%= @customer.followers.count %>
+        <% end %><br>
+        <%= link_to "いいね一覧", favorite_posts_public_customer_path(params[:id]), class: 'mr-2' %>
+      </div>
     </div>
-
-    </div>
-
-
   </div>
   <%= render 'public/posts/index', posts: @posts %>
 </div>

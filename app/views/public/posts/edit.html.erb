@@ -1,11 +1,51 @@
 <div class="container">
-  <div class="row">
-    <%= render 'layouts/errors', obj: @post %>
-    <div class=".col-md-3">
-      <h1>投稿編集</h1>
-    </div>
-    <div class=".col-md-3">
-      <%= render 'public/posts/form', post: @post, tag_list: @tag_list %>
+  <div class="row ">
+    <div class="mt-2 mb-2 card shadow-sm text-center" >
+      <% if @post.image.attached? %>
+        <%= image_tag @post.image, class: 'img-fluid' %>
+      <% else %>
+        <%= image_tag 'no_image', class: 'img-fluid' %>
+      <% end %>
+      <div class="card-body">
+        <h3 class="card-title">
+          <%= @post.place.place_name %>
+          <%= render 'public/favorites/btn', post: @post %>
+        </h3>
+        <div class="card-item pb-4">
+          <%= form_with model: @post, url: public_posts_path, local: true do |f| %>
+            <div class="form-group">
+              <% @tag_list = @post.tags.pluck(:tag).join(',') %>
+              <%= f.text_field :tag, value: @tag_list, placeholder: "タグ（タグ1,タグ2,~）" %>
+              <%= f.hidden_field :image, accept: "image/*" %>
+              <%= f.hidden_field :place, placeholder: "場所" %>
+              <%= f.hidden_field :introduction, placeholder: "説明" %>
+              <%= f.submit '投稿' %>
+            </div>
+          <% end %>
+        </div>
+        <div class="card-item pb-2">
+          <%= @post.introduction %>
+          <%= link_to public_customer_path(@post.customer), class: 'pl-2' do %>
+              <%= image_tag @post.customer.get_profile_image(25, 25), class: "img-thumbnail" %><%= @post.customer.name %>#<%= @post.customer.id %>
+          <% end %>
+        </div>
+        <div class="card-item pb-2">
+          <% @post.comments.each do |comment| %>
+            <div class="comment pb-2">
+              <%= link_to public_customer_path(comment.customer), class: 'pr-2' do %>
+                <%= image_tag comment.customer.get_profile_image(25, 25), class: "img-thumbnail" %>
+              <% end %>
+              <%= comment.body %>
+            </div>
+          <% end %>
+        </div>
+        <div class="card-item">
+          <%= form_with model: @comment, url: public_post_comments_path(@post) do |f| %>
+            <%= f.text_area :body, rows: '5', placeholder: "コメント", class: "col-md-6" %><br>
+            <%= f.submit "送信" %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
