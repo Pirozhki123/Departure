@@ -2,13 +2,9 @@
   <div class="row">
     <div class="profile_left col-md-6">
 
-    <div class="profile-group customer_image">
-      <% if @customer.profile_image.attached? %>
-        <%= image_tag @customer.profile_image, size: "192x108", class: "img-fluid" %>
-      <% else %>
-        <%= image_tag 'no_image', size: "192x108", class: "img-fluid float-right" %>
-      <% end %>
-    </div>
+    <!--<div class="profile-group customer_image">-->
+      <%= image_tag @customer.get_profile_image(192, 108), class: "img-thumbnail float-right" %>
+    <!--</div>-->
 
     </div>
     <div class="profile_right col-md-6">
@@ -47,7 +43,7 @@
           <% end %>
         <% end %>
       <% else %>
-        <%= link_to edit_public_customer_path(@customer), class: "btn btn-outline-secondary btn-block" do %>
+        <%= link_to edit_public_customer_path(@customer), class: "btn btn-outline-secondary btn-block w-25" do %>
           <i class="fas fa-user-cog"></i>
         <% end %>
       <% end %>
