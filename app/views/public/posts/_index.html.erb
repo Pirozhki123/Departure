@@ -11,9 +11,9 @@
       <div class="card mt-2 mb-2 shadow-sm text-center" >
         <%= link_to  public_post_path(post) do %>
           <% if post.image.attached? %>
-            <%= image_tag post.image, size: "192x108", class: "card-img-top img-fluid" %>
+            <%= image_tag post.image, class: "card-img-top img-fluid post-img" %>
           <% else %>
-            <%= image_tag 'no_image', size: "192x108", class: "card-img-top" %>
+            <%= image_tag 'no_image', class: "card-img-top" %>
           <% end %>
         <% end %>
         <div class="card-body">
