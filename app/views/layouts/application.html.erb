@@ -6,6 +6,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/b8e639c0f1.js" crossorigin="anonymous"></script>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -13,41 +15,46 @@
 
   <body class="body">
     <header>
-      <nav class="navbar navbar-expand-sm navbar-dark mb-3">
-        <a class="navbar-brand" href="/"><h3>Departure</h3></a>
-        <div class="collapse navbar-collapse justify-content-end">
-          <ul class="navbar-nav">
-            <li class="nav-item ml-2">
-              <%= link_to 'About',public_homes_about_path %>
-            </li>
-            <li class="nav-item ml-2">
-              <%= link_to '投稿一覧',public_posts_path %>
-            </li>
-            <%if customer_signed_in? %>
-            <li class="nav-item ml-2">
-                <%= link_to "マイページ", public_customer_path(current_customer) %>
+      <nav class="navbar navbar-expand-lg navbar-dark mb-3">
+        <div class="container">
+          <a class="navbar-brand p-3" href="/"><h3>Departure</h3></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse  justify-content-end" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item ml-2">
+                <%= link_to 'About',public_homes_about_path %>
               </li>
               <li class="nav-item ml-2">
-                <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+                <%= link_to '投稿一覧',public_posts_path %>
               </li>
-            <%else %>
+              <%if customer_signed_in? %>
               <li class="nav-item ml-2">
-                <%= link_to "新規登録", new_customer_registration_path %>
-              </li>
-              <li class="nav-item ml-2">
-                <%= link_to "ログイン", new_customer_session_path %>
-              </li>
-            <%end %>
-            <%if admin_signed_in? %>
-              <li class="nav-item ml-2">
-                <%= link_to "ログアウト（管理者）", destroy_admin_session_path, method: :delete %>
-              </li>
-            <%else %>
-              <li class="nav-item ml-2">
-                <%= link_to "ログイン（管理者）", new_admin_session_path %>
-              </li>
-            <%end %>
-          </ul>
+                  <%= link_to "マイページ", public_customer_path(current_customer) %>
+                </li>
+                <li class="nav-item ml-2">
+                  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+                </li>
+              <%else %>
+                <li class="nav-item ml-2">
+                  <%= link_to "新規登録", new_customer_registration_path %>
+                </li>
+                <li class="nav-item ml-2">
+                  <%= link_to "ログイン", new_customer_session_path %>
+                </li>
+              <%end %>
+              <%if admin_signed_in? %>
+                <li class="nav-item ml-2">
+                  <%= link_to "ログアウト（管理者）", destroy_admin_session_path, method: :delete %>
+                </li>
+              <%else %>
+                <li class="nav-item ml-2">
+                  <%= link_to "ログイン（管理者）", new_admin_session_path %>
+                </li>
+              <%end %>
+            </ul>
+          </div>
         </div>
       </nav>
     </header>

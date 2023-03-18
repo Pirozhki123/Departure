@@ -12,6 +12,10 @@ class Public::SearchesController < ApplicationController
       @posts = Tag.looks(params[:search], params[:word])
     elsif @range == "Place"
       @posts = Place.looks(params[:search], params[:word])
+      @favorite_count = 0
+      @posts.each do |post|
+        @favorite_count = @favorite_count + post.favorites.count
+      end
     else
       @posts = Post.all
     end

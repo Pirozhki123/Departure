@@ -1,11 +1,8 @@
 <div class="container">
   <div class="row">
     <%= render 'layouts/errors', obj: @post %>
-    <div class="col-md-9 mb2">
+    <div class="col-md-12 mb2">
       <%= render 'public/posts/index', posts: @posts %>
-    </div>
-    <div class="col-md-3">
-      <%= render 'public/posts/form', post: @post %>
     </div>
   </div>
 </div>
