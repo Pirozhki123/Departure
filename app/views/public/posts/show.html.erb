@@ -8,7 +8,9 @@
       <% end %>
       <div class="card-body">
         <h3 class="card-title">
-          <%= @post.place.place_name %>
+          <%= link_to  public_search_path(word: @post.place.place_name, range:"Place", search: "perfect_match"), class: 'pr-2' do %>
+            <%= @post.place.place_name %>
+          <% end %>
           <%= render 'public/favorites/btn', post: @post %>
         </h3>
         <div class="card-item pb-4">

@@ -8,8 +8,12 @@ class Public::SearchesController < ApplicationController
       @customers = Customer.looks(params[:search], params[:word])
     elsif @range == "Word"
       @posts = Post.looks(params[:search], params[:word])
-    else
+    elsif @range == "Tag"
       @posts = Tag.looks(params[:search], params[:word])
+    elsif @range == "Place"
+      @posts = Place.looks(params[:search], params[:word])
+    else
+      @posts = Post.all
     end
   end
 end
