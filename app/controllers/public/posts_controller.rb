@@ -3,7 +3,7 @@ class Public::PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = Post.all
+    @posts = Post.all.order(updated_at: :desc)
     @tag_list = @post.tags.pluck(:tag).join(',')
   end
 

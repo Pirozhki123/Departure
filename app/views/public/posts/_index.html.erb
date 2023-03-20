@@ -1,7 +1,7 @@
 <div class="card-deck">
   <% posts.each do |post| %>
     <div class="col-md-6">
-      <div class="card mt-2 mb-2 shadow-sm text-center fadeUp" >
+      <div class="card mt-2 mb-2 shadow-sm text-center delay-time02 fadeUp" >
         <%= link_to  public_post_path(post) do %>
           <%= image_tag post.get_image(836, 600), class: "card-img-top fadeIn" %>
         <% end %>

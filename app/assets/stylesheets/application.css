@@ -50,6 +50,23 @@
   object-fit: cover;
 }
 
+.profile_image {
+  width: 90px;
+  height:90px;
+  border-radius:50%;
+  object-fit: cover;
+}
+
+/* アニメーションスタートの遅延時間を決めるCSS*/
+
+.delay-time02{
+animation-delay: 0.2s;
+}
+
+.delay-time04{
+animation-delay: 0.4s;
+}
+
 /*フェードインモーション*/
 .fadeIn{
 animation-name:fadeInAnime;
