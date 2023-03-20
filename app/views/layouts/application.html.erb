@@ -12,60 +12,18 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Source+Sans+Pro:wght@900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Source+Sans+Pro:wght@900&display=swap" rel="stylesheet">
+
   <body class="body">
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-dark mb-3">
-        <div class="container">
-          <a class="navbar-brand pl-3" href="/"><%= image_tag 'brand.png',width: '75%', height: '75%' %></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse  justify-content-end" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item ml-2">
-                <%= link_to 'About',public_homes_about_path, class: 'nav-link' %>
-              </li>
-              <li class="nav-item ml-2">
-                <%= link_to '投稿一覧',public_posts_path, class: 'nav-link' %>
-              </li>
-              <%if customer_signed_in? %>
-              <li class="nav-item ml-2">
-                  <%= link_to "マイページ", public_customer_path(current_customer), class: 'nav-link' %>
-                </li>
-                <li class="nav-item ml-2">
-                  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link' %>
-                </li>
-              <%else %>
-                <li class="nav-item ml-2">
-                  <%= link_to "新規登録", new_customer_registration_path, class: 'nav-link' %>
-                </li>
-                <li class="nav-item ml-2">
-                  <%= link_to "ログイン", new_customer_session_path, class: 'nav-link' %>
-                </li>
-              <%end %>
-              <%if admin_signed_in? %>
-                <li class="nav-item ml-2">
-                  <%= link_to "ログアウト（管理者）", destroy_admin_session_path, method: :delete, class: 'nav-link' %>
-                </li>
-              <%else %>
-                <li class="nav-item ml-2">
-                  <%= link_to "ログイン（管理者）", new_admin_session_path, class: 'nav-link' %>
-                </li>
-              <%end %>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+    <%= render 'layouts/header' %>
     <%=yield %>
   </body>
 </html>
