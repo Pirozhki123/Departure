@@ -5,9 +5,11 @@
         <%= link_to  public_post_path(post) do %>
           <%= image_tag post.get_image(836, 600), class: "card-img-top fadeIn" %>
         <% end %>
-        <div class="card-body">
-          <h5 class="card-title  text-truncate">
+        <div class="card-body justify-content-center">
+          <h5 style="display: inline-block;" id="favorite_btn_<%= post.id %>">
             <%= render 'public/favorites/btn', post: post %>
+          </h5>
+          <h5 style="display: inline-block;" class="card-title">
             <%= post.place.place_name %>
           </h5>
           <div class="card-item pb-4 text-truncate">
