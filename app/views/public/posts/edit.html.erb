@@ -12,12 +12,13 @@
           <%= render 'public/favorites/btn', post: @post %>
         </h3>
         <div class="card-item pb-4">
-          <%= form_with model: @post, url: public_posts_path, local: true do |f| %>
+          <%= form_with model: @post, url: public_post_path, method: :patch, local: true do |f| %>
             <div class="form-group">
               <% @tag_list = @post.tags.pluck(:tag).join(',') %>
               <%= f.text_field :tag, value: @tag_list, placeholder: "タグ（タグ1,タグ2,~）" %>
-              <%= f.hidden_field :image, accept: "image/*" %>
-              <%= f.hidden_field :place, placeholder: "場所" %>
+              <!--<= f.hidden_field :image, accept: "image/*" %>-->
+              <!--<= f.hidden_field :place_id, placeholder: "場所id" %>-->
+              <!--<= f.hidden_field :customer_id, placeholder: "投稿者id" %>-->
               <%= f.hidden_field :introduction, placeholder: "説明" %>
               <%= f.submit 'タグ編集' %>
             </div>

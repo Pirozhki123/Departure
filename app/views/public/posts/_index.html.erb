@@ -1,30 +1,23 @@
-<div class ="text-center pt-2 pb-2">
-  <%= link_to new_public_post_path do %>
-    <h1>
-      <i class="fa-solid fa-circle-plus"></i>
-    </h1>
-  <% end %>
-</div>
 <div class="card-deck">
   <% posts.each do |post| %>
     <div class="col-md-6">
       <div class="card mt-2 mb-2 shadow-sm text-center" >
         <%= link_to  public_post_path(post) do %>
           <% if post.image.attached? %>
-            <%= image_tag post.image, class: "card-img-top img-fluid post-img" %>
+            <%= image_tag post.image, class: "card-img-top" %>
           <% else %>
             <%= image_tag 'no_image', class: "card-img-top" %>
           <% end %>
         <% end %>
         <div class="card-body">
-          <h5 class="card-title">
-            <%= post.place.place_name %>
+          <h5 class="card-title  text-truncate">
             <%= render 'public/favorites/btn', post: post %>
+            <%= post.place.place_name %>
           </h5>
-          <div class="card-item pb-4">
+          <div class="card-item pb-4 text-truncate">
             <% post_tags = post.tags %>
-              <% post_tags.each do |tag| %>
-                <%= link_to  public_search_path(word: tag.tag, range:"Tag", search: "perfect_match"), class: 'pr-2' do %>
+            <% post_tags.each do |tag| %>
+              <%= link_to  public_search_path(word: tag.tag, range:"Tag", search: "perfect_match"), class: 'pr-2' do %>
                 <%= tag.tag %><%= "(#{tag.posts.count})" %>
               <% end %>
             <% end %>

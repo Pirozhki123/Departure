@@ -26,3 +26,9 @@
 .body {
   background-color: #e6e6e6;
 }
+
+.card-img-top {
+  width: 100%;
+  height: 300px;
+  object-fit: cover; /* width, heightといっしょに使います */
+}
