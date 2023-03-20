@@ -2,8 +2,6 @@
   <div class="row">
     <%= render 'layouts/errors', obj: @post %>
     <div class="col-md-9 mb2">
-      <!--おすすめの追加（rowで区切る）-->
-      <%= @recommend_tag1 %>
       <%= render 'public/posts/btn' %>
       <%= render 'public/posts/index', posts: @recommend %>
       <%= render 'public/posts/index', posts: @posts %>

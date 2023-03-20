@@ -1,7 +1,7 @@
 <div class="card-deck">
   <% posts.each do |post| %>
     <div class="col-md-6">
-      <div class="card mt-2 mb-2 shadow-sm text-center" >
+      <div class="card mt-2 mb-2 shadow-sm text-center fadeUp" >
         <%= link_to  public_post_path(post) do %>
           <% if post.image.attached? %>
             <%= image_tag post.image, class: "card-img-top" %>
@@ -31,7 +31,7 @@
             <%= link_to public_customer_path(post.customer) do %>
               <p>
                 <%= post.customer.name %>
-                <%= image_tag post.customer.get_profile_image(30, 30), class: "img-thumbnail" %>
+                <%= image_tag post.customer.get_profile_image(100, 100), class: "index_profile_image" %>
               </p>
             <% end %>
           </div>
