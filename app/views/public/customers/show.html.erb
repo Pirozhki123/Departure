@@ -5,4 +5,7 @@
   <div class="row">
     <%= render 'public/posts/index', posts: @posts %>
   </div>
+  <div class="row mx-auto">
+    <h3><%= paginate @posts %></h3>
+  </div>
 </div>

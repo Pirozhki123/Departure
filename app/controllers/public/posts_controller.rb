@@ -3,7 +3,7 @@ class Public::PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = Post.all.order(updated_at: :desc)
+    @posts = Post.all.order(updated_at: :desc).page(params[:page])
     @tag_list = @post.tags.pluck(:tag).join(',')
   end
 
@@ -33,7 +33,7 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @posts = Post.all
+    @posts = Post.all.page(params[:page])
     @post.customer_id = current_customer.id
     #場所の保存処理
     place_name = params[:post][:place]

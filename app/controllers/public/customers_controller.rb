@@ -3,7 +3,7 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @posts = @customer.posts
+    @posts = @customer.posts.page(params[:page])
   end
 
   def edit
@@ -20,7 +20,7 @@ class Public::CustomersController < ApplicationController
     #ユーザーがいいねした投稿一覧
     @customer = Customer.find(params[:id])
     favorites = Favorite.where(customer_id: @customer.id).pluck(:post_id) #Favoriteモデルから表示しているユーザーがいいねしたものを配列で取得
-    @posts = Post.find(favorites)
+    @posts = Post.find(favorites).page(params[:page])
 
     @post = Post.new
   end
