@@ -23,6 +23,13 @@
   background-color: #0A2C5C;
 }
 
+
+.nav-link, .navbar-brand {
+  text-decoration: none;
+  color: white !important;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
 .body {
   background-color: #e6e6e6;
 }
@@ -31,6 +38,10 @@
   width: 100%;
   height: 300px;
   object-fit: cover;
+}
+
+.card-title {
+  font-family: 'Noto Sans JP', sans-serif;
 }
 
 .index_profile_image {
@@ -77,3 +88,4 @@ opacity:0;
 	transform: translateY(0);
   }
 }
+

@@ -1,5 +1,5 @@
 class Public::HomesController < ApplicationController
-  before_action :authenticate_customer!
+  before_action :authenticate_customer!, only: [:top]
 
   def top
     @my_post = current_customer.posts
