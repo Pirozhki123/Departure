@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   namespace :public do
     resources :posts, only: [:index, :show, :edit, :new, :create, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
-      resources :comments, only: [:create, :desttoy]
+      resources :comments, only: [:create, :destroy]
     end
 
     resources :customers, only: [:show, :edit, :update] do

@@ -2,9 +2,9 @@
   <div class="row card-deck">
     <div class="mt-2 mb-2 card shadow-sm text-center fadeUp" >
       <% if @post.image.attached? %>
-        <%= image_tag @post.image, class: 'img-fluid' %>
+        <%= image_tag @post.image, class: 'img-fluid fadeIn' %>
       <% else %>
-        <%= image_tag 'no_image', class: 'img-fluid' %>
+        <%= image_tag 'no_image', class: 'img-fluid fadeIn' %>
       <% end %>
       <div class="card-body">
         <h3 class="card-title">
@@ -31,18 +31,11 @@
               <%= image_tag @post.customer.get_profile_image(25, 25), class: "img-thumbnail" %><%= @post.customer.name %>#<%= @post.customer.id %>
           <% end %>
         </div>
-        <div class="card-item pb-2">
-          <% @post.comments.each do |comment| %>
-            <div class="comment pb-2">
-              <%= link_to public_customer_path(comment.customer), class: 'pr-2' do %>
-                <%= image_tag comment.customer.get_profile_image(25, 25), class: "img-thumbnail" %>
-              <% end %>
-              <%= comment.body %>
-            </div>
-          <% end %>
+        <div class="card-item pb-2" id="comments">
+          <%= render 'public/comments/comments', post: @post %>
         </div>
         <div class="card-item">
-          <%= form_with model: @comment, url: public_post_comments_path(@post) do |f| %>
+          <%= form_with model: @comment, url: public_post_comments_path(@post), local: false do |f| %>
             <%= f.text_area :body, rows: '5', placeholder: "コメント", class: "col-md-6" %><br>
             <%= f.submit "送信" %>
           <% end %>

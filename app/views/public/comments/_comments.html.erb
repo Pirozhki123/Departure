@@ -1,0 +1,11 @@
+<% post.comments.each do |comment| %>
+  <div class="comment pb-2">
+    <%= link_to public_customer_path(comment.customer), class: 'pr-2' do %>
+      <%= image_tag comment.customer.get_profile_image(25, 25), class: "img-thumbnail" %>
+    <% end %>
+    <%= comment.body %>
+    <% if comment.customer == current_customer %>
+      <%= link_to "消去", public_post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
+    <% end %>
+  </div>
+<% end %>
