@@ -1,58 +1,45 @@
-<div class='jscroll-div'>
-
-<div class="card-deck">
-  <% posts.each do |post| %>
-    <div class="col-md-6">
-      <div class="card mt-2 mb-2 shadow-sm text-center delay-time02 fadeUp" >
-        <%= link_to  public_post_path(post) do %>
-          <%= image_tag post.get_image(836, 600), class: "card-img-top fadeIn" %>
-        <% end %>
-        <div class="card-body justify-content-center">
-          <h5 style="display: inline-block;" id="favorite_btn_<%= post.id %>">
-            <%= render 'public/favorites/btn', post: post %>
-          </h5>
-          <h5 style="display: inline-block;" class="card-title">
-            <%= post.place.place_name %>
-          </h5>
-          <div class="card-item pb-4 text-truncate">
-            <% post_tags = post.tags %>
-            <% post_tags.each do |tag| %>
-              <%= link_to  public_search_path(word: tag.tag, range:"Tag", search: "perfect_match"), class: 'btn btn-outline-secondary btn-sm pr-2' do %>
-                <%= tag.tag %><%= "(#{tag.posts.count})" %>
-              <% end %>
-            <% end %>
-          </div>
-          <div class="card-item d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-              <% if post.customer == current_customer %>
-                <%= link_to "削除", public_post_path(post), method: :delete, class: 'btn btn-danger btn-sm', "data-confirm" => "本当に削除しますか？" %>
+<div class='scroll-list jscroll-div'>
+  <div class="card-deck">
+    <% posts.each do |post| %>
+      <div class="col-md-6">
+        <div class="card mt-2 mb-2 shadow-sm text-center delay-time02 fadeUp" >
+          <%= link_to  public_post_path(post) do %>
+            <%= image_tag post.get_image(836, 600), class: "card-img-top fadeIn" %>
+          <% end %>
+          <div class="card-body justify-content-center">
+            <h5 style="display: inline-block;" id="favorite_btn_<%= post.id %>">
+              <%= render 'public/favorites/btn', post: post %>
+            </h5>
+            <h5 style="display: inline-block;" class="card-title">
+              <%= post.place.place_name %>
+            </h5>
+            <div class="card-item pb-4 text-truncate">
+              <% post_tags = post.tags %>
+              <% post_tags.each do |tag| %>
+                <%= link_to  public_search_path(word: tag.tag, range:"Tag", search: "perfect_match"), class: 'btn btn-outline-secondary btn-sm pr-2' do %>
+                  <%= tag.tag %><%= "(#{tag.posts.count})" %>
+                <% end %>
               <% end %>
             </div>
-            <%= link_to public_customer_path(post.customer) do %>
-              <p>
-                <%= post.customer.name %>
-                <%= image_tag post.customer.get_profile_image(100, 100), class: "index_profile_image" %>
-              </p>
-            <% end %>
+            <div class="card-item d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <% if post.customer == current_customer %>
+                  <%= link_to "削除", public_post_path(post), method: :delete, class: 'btn btn-danger btn-sm', "data-confirm" => "本当に削除しますか？" %>
+                <% end %>
+              </div>
+              <%= link_to public_customer_path(post.customer) do %>
+                <p>
+                  <%= post.customer.name %>
+                  <%= image_tag post.customer.get_profile_image(100, 100), class: "index_profile_image" %>
+                </p>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+  <div class="row mx-auto">
+    <h3><%= paginate @posts %></h3>
+  </div>
 </div>
-<div class="row mx-auto">
-  <h3><%= paginate @posts %></h3>
-</div>
-
-</div>
-
-<script>
-  $(document).on('turbolinks:load', function() {
-    $('.jscroll-div').jscroll({
-      contentSelector: '.jscroll',
-      nextSelector: '.next a',
-      loadingHtml: '読み込み中',
-      padding: 10
-    });
-  });
-</script>

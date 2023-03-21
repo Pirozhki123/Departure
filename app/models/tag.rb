@@ -6,18 +6,18 @@ class Tag < ApplicationRecord
 
   def self.looks(search, word)
     if search == "perfect_match"
-      tags = Tag.where("tag LIKE?", "#{word}")
+      tags = Post.left_joins(:tags).where("tags.tag LIKE?", "#{word}")
     elsif search == "forward_match"
-      tags = Tag.where("tag LIKE?", "#{word}%")
+      tags = Post.left_joins(:tags).where("tags.tag LIKE?", "#{word}%")
     elsif search == "backward_match"
-      tags = Tag.where("tag LIKE?", "%#{word}")
+      tags = Post.left_joins(:tags).where("tags.tag LIKE?", "%#{word}")
     elsif search == "partial_match"
-      tags = Tag.where("tag LIKE?", "%#{word}%")
+      tags = Post.left_joins(:tags).where("tags.tag LIKE?", "%#{word}%")
     else
-      tags = Tag.all
+      tags = Post.left_joins(:tags).all
     end
 
-    return tags.inject(init = []) {|result, tag| result + tag.posts} #@tagsの形に変換
+#    return tags.inject(init = []) {|result, tag| result + tag.posts} #@tagsの形に変換
 
   end
 end

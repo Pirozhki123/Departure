@@ -12,6 +12,17 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
+import "../packs/jquery.jscroll.min.js"
+
+
+$(document).on('turbolinks:load', function() {
+  $('.jscroll-div').jscroll({
+    contentSelector: '.scroll-list',
+    nextSelector: 'span.next:last a',
+    loadingHtml: '読み込み中',
+    padding: 10
+  });
+});
 
 Rails.start()
 Turbolinks.start()
