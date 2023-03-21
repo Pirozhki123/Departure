@@ -1,38 +1,43 @@
-<table class='table bg-light fadeIn'>
-  <thead>
-    <tr>
-      <th>image</th>
-      <th>name</th>
-      <th colspan="6"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% customers.each do |customer| %>
+<div class='scroll-list jscroll-div'>
+  <table class='table bg-light fadeIn'>
+    <thead>
       <tr>
-        <td>
-          <%= link_to public_customer_path(customer) do %>
-            <%= image_tag customer.get_profile_image(50, 50), class: "index_profile_image" %>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to public_customer_path(customer) do %>
-            <%= customer.name %>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to public_customer_followings_path(customer) do %>
-            フォロー : <%= customer.followings.count %>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to public_customer_followers_path(customer) do %>
-            フォロワー : <%= customer.followers.count %>
-          <% end %>
-        </td>
-        <td>
-          <%= render 'public/relationships/btn', customer: customer %>
-        </td>
+        <th>image</th>
+        <th>name</th>
+        <th colspan="6"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% customers.each do |customer| %>
+        <tr>
+          <td>
+            <%= link_to public_customer_path(customer) do %>
+              <%= image_tag customer.get_profile_image(50, 50), class: "index_profile_image" %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to public_customer_path(customer) do %>
+              <%= customer.name %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to public_customer_followings_path(customer) do %>
+              フォロー : <%= customer.followings.count %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to public_customer_followers_path(customer) do %>
+              フォロワー : <%= customer.followers.count %>
+            <% end %>
+          </td>
+          <td>
+            <%= render 'public/relationships/btn', customer: customer %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="row mx-auto">
+    <h3><%= paginate customers %></h3>
+  </div>
+</div>

@@ -5,18 +5,18 @@ class Place < ApplicationRecord
 
   def self.looks(search, word)
     if search == "perfect_match"
-      place = Place.where("place_name LIKE?", "#{word}")
+      place = Post.left_joins(:place).where("places.place_name LIKE?", "#{word}")
     elsif search == "forward_match"
-      place = Place.where("place_name LIKE?", "#{word}%")
+      place = Post.left_joins(:place).where("places.place_name LIKE?", "#{word}%")
     elsif search == "backward_match"
-      place = Place.where("place_name LIKE?", "%#{word}")
+      place = Post.left_joins(:place).where("places.place_name LIKE?", "%#{word}")
     elsif search == "partial_match"
-      place = Place.where("place_name LIKE?", "%#{word}%")
+      place = Post.left_joins(:place).where("places.place_name LIKE?", "%#{word}%")
     else
-      place = Place.all
+      place = Post.left_joins(:place).all
     end
 
-    return place.inject(init = []) {|result, place| result + place.posts}
+    # return place.inject(init = []) {|result, place| result + place.posts}
 
   end
 end

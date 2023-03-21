@@ -11,7 +11,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def index
-    @customers = Customer.all
+    @customers = Customer.all.page(params[:page]).per(30)
   end
 
   def update

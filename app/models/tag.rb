@@ -17,7 +17,5 @@ class Tag < ApplicationRecord
       tags = Post.left_joins(:tags).all
     end
 
-#    return tags.inject(init = []) {|result, tag| result + tag.posts} #@tagsの形に変換
-
   end
 end
