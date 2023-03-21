@@ -1,7 +1,11 @@
 <div class="container">
   <div class="row">
+    <%= render 'public/customers/profile', customer: @customer %>
+  </div>
+  <div class="row">
     <%= render 'layouts/errors', obj: @post %>
     <div class="col-md-12 mb2">
+      <h2 class="text-center fadeIn"><%= @customer.name %>のいいね一覧</h2>
       <%= render 'public/posts/index', posts: @posts %>
     </div>
   </div>

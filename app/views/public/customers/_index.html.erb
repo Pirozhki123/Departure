@@ -11,7 +11,7 @@
       <tr>
         <td>
           <%= link_to public_customer_path(customer) do %>
-            <%= image_tag customer.get_profile_image(50, 50) %>
+            <%= image_tag customer.get_profile_image(50, 50), class: "index_profile_image" %>
           <% end %>
         </td>
         <td>
@@ -33,16 +33,15 @@
           <% if customer != current_customer %>
             <% if current_customer.following?(customer) %>
               <%= link_to public_customer_relationships_path(customer), method: :delete do %>
-                <button class="btn btn-info">フォロー外す</button>
+                <button class="btn btn-info btn-sm">フォロー外す</button>
               <% end %>
             <% else %>
               <%= link_to public_customer_relationships_path(customer), method: :post do %>
-                <button class="btn btn-success">フォローする</button>
+                <button class="btn btn-success btn-sm">フォローする</button>
               <% end %>
             <% end %>
           <% end %>
         </td>
-
       </tr>
     <% end %>
   </tbody>
