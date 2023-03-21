@@ -1,3 +1,5 @@
+<div class='jscroll-div'>
+
 <div class="card-deck">
   <% posts.each do |post| %>
     <div class="col-md-6">
@@ -38,3 +40,19 @@
     </div>
   <% end %>
 </div>
+<div class="row mx-auto">
+  <h3><%= paginate @posts %></h3>
+</div>
+
+</div>
+
+<script>
+  $(document).on('turbolinks:load', function() {
+    $('.jscroll-div').jscroll({
+      contentSelector: '.jscroll',
+      nextSelector: '.next a',
+      loadingHtml: '読み込み中',
+      padding: 10
+    });
+  });
+</script>

@@ -9,7 +9,7 @@ class Public::SearchesController < ApplicationController
     elsif @range == "Word"
       @posts = Post.looks(params[:search], params[:word])
     elsif @range == "Tag"
-      @posts = Tag.looks(params[:search], params[:word])
+      @posts = Tag.looks(params[:search], params[:word]).page(params[:page])
     elsif @range == "Place"
       @posts = Place.looks(params[:search], params[:word])
       @favorite_count = 0

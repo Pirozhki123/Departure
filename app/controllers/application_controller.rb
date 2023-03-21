@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
     case resource
     when Admin
       admin_customer_index_path
+    when Customer
+      root_path
     end
   end
 

@@ -25,7 +25,7 @@ class Public::PostsController < ApplicationController
     tag_list = params[:post][:tag].delete(' ').delete('　').split(',')#送られたtag情報を「,」で区切ってスペースを削除
     if @post.update(post_params)
       @post.save_tags(tag_list) #save_tagsメソッドを実行（モデルに記載）
-      redirect_to root_path, notice: "編集が完了しました"
+      redirect_to public_post_path(@post), notice: "編集が完了しました"
     else
       render 'public/homes/top'
     end

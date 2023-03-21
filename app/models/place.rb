@@ -16,7 +16,7 @@ class Place < ApplicationRecord
       place = Place.all
     end
 
-    return place.inject(init = []) {|result, place| result + place.posts} #@tagsの形に変換
+    return place.inject(init = []) {|result, place| result + place.posts}
 
   end
 end
