@@ -6,6 +6,7 @@ class Admin::CustomerController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
+    @posts = @customer.posts.page(params[:page])
   end
 
   def edit
@@ -14,7 +15,7 @@ class Admin::CustomerController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
-      redirect_to admin_customer_path(@customer), notice: "更新に成功しました"
+      redirect_to admin_customer_index_path(@customer), notice: "更新に成功しました"
     else
       render 'admin/customer/edit', notice: "更新に失敗しました"
     end
