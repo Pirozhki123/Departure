@@ -7,6 +7,7 @@ class Post < ApplicationRecord
   has_many :tags, through: :tag_relations, dependent: :destroy
   has_one_attached :image
 
+  validates :image, presence: true
   validates :customer_id, presence: true
   validates :place_id, presence: true
   validates :introduction, presence: true
