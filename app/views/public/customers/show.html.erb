@@ -3,7 +3,9 @@
     <%= render 'public/customers/profile', customer: @customer %>
   </div>
   <div class="row">
-    <%= render 'public/posts/index', posts: @posts %>
+    <div class=" col-md-12">
+      <%= render 'public/posts/index', posts: @posts %>
+    </div>
   </div>
   <div class="row mx-auto">
     <h3><%= paginate @posts %></h3>
