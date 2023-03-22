@@ -1,7 +1,7 @@
 class Place < ApplicationRecord
   has_many :posts, dependent: :destroy
 
-  validates :place_name, presence: true, uniqueness: true
+  validates :place_name, presence: true, uniqueness: true, length: { maximum: 50 }
 
   def self.looks(search, word)
     if search == "perfect_match"

@@ -1,9 +1,10 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
+  before_action :is_matching_login_customer, only: [:edit, :update]
 
   def show
     @customer = Customer.find(params[:id])
-    @posts = @customer.posts.page(params[:page])
+    @posts = @customer.posts.order('created_at DESC').page(params[:page])
   end
 
   def edit
@@ -23,9 +24,7 @@ class Public::CustomersController < ApplicationController
   def favorite_posts
     #ユーザーがいいねした投稿一覧
     @customer = Customer.find(params[:id])
-    favorites = Favorite.where(customer_id: @customer.id).pluck(:post_id) #Favoriteモデルから表示しているユーザーがいいねしたものを配列で取得
-    @posts = Post.find(favorites)
-
+    @posts = Post.left_joins(:favorites).where(customer_id: @customer.id).page(params[:page])
     @post = Post.new
   end
 
@@ -33,6 +32,13 @@ class Public::CustomersController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(:name, :email, :introduction, :private, :profile_image)
+  end
+
+  def is_matching_login_customer
+    customer = Customer.find(params[:id])
+    unless customer.id == current_customer.id
+      redirect_to root_path
+    end
   end
 
 end

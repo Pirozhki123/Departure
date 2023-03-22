@@ -10,7 +10,7 @@ class Post < ApplicationRecord
   validates :image, presence: true
   validates :customer_id, presence: true
   validates :place_id, presence: true
-  validates :introduction, presence: true
+  validates :introduction, presence: true, length: { maximum: 150 }
 
   def save_tags(tags) #既存のタグが被らないようにデータベースに保存
     current_tags = self.tags.pluck(:tag) unless self.tags.nil? #:tagが空じゃなければ配列を取得

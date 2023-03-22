@@ -19,15 +19,7 @@
   <div class="profile-group customer_name mx-auto">
     <h5>
       <% if customer != current_customer %>
-        <% if current_customer.following?(customer) %>
-          <%= link_to public_customer_relationships_path(customer), method: :delete do %>
-            <button class="btn btn-info btn-sm">フォロー外す</button>
-          <% end %>
-        <% else %>
-          <%= link_to public_customer_relationships_path(customer), method: :post do %>
-            <button class="btn btn-success btn-sm">フォローする</button>
-          <% end %>
-        <% end %>
+        <%= render 'public/relationships/btn', customer: customer %>
       <% else %>
         <%= link_to edit_public_customer_path(customer), class: "btn btn-outline-secondary btn-block btn-sm" do %>
           <i class="fas fa-user-cog"></i>
