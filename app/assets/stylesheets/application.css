@@ -30,11 +30,11 @@
 }
 
 .body {
-  background-color: #e6e6e6;
+  background-color: #0F428A;
 }
 
-.about {
-  background-image: url("back-ground.jpg");
+.text-white{
+  color: white;
 }
 
 .card-img-top {
