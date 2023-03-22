@@ -39,7 +39,7 @@
         </div>
         <div class="card-item">
           <%= form_with model: @comment, url: public_post_comments_path(@post) do |f| %>
-            <%= f.text_area :body, rows: '5', placeholder: "コメント", class: "col-md-6" %><br>
+            <%= f.text_area :body, rows: '2', placeholder: "コメント", class: "col-md-6" %><br>
             <%= f.submit "送信" %>
           <% end %>
         </div>
