@@ -24,7 +24,10 @@ class Public::CustomersController < ApplicationController
   def favorite_posts
     #ユーザーがいいねした投稿一覧
     @customer = Customer.find(params[:id])
-    @posts = Post.left_joins(:favorites).where(customer_id: @customer.id).page(params[:page])
+    # favorites = Favorite.where(customer_id: @customer.id)
+    # @posts = Post.where(id: favorites.post_id)
+    @posts = Post.left_joins(:favorites).where("favorites.customer_id LIKE?", "%#{@customer.id}%").page(params[:page])
+    # @posts = Post.left_joins(:favorites).where(customer_id: @customer.id).page(params[:page])
     @post = Post.new
   end
 

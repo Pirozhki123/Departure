@@ -75,6 +75,22 @@ animation-delay: 0.4s;
 animation-delay: 0.6s;
 }
 
+.delay-time08{
+animation-delay: 0.8s;
+}
+
+.delay-time10{
+animation-delay: 1.0s;
+}
+
+.delay-time12{
+animation-delay: 1.2s;
+}
+
+.delay-time14{
+animation-delay: 1.4s;
+}
+
 /*フェードインモーション*/
 .fadeIn{
 animation-name:fadeInAnime;

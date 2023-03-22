@@ -7,10 +7,13 @@
           <h2>Users search for "<%="#{@word}"%>"</h2>
           <%= render 'public/customers/index', customers: @customers %>
         <% elsif @range == "Place" %>
-          <h2>Place search for "<%="#{@word}"%>"<i class="fas fa-heart" aria-hidden="true" style="color: red;"></i><%= @favorite_count %></h2>
+          <h2>Place search for "<%="#{@word}"%>"</h2>
           <%= render 'public/posts/index', posts: @posts %>
-        <% else %>
+        <% elsif @range == "Tag" %>
           <h2>Posts search for "<%="#{@word}"%>"</h2>
+          <%= render 'public/posts/index', posts: @posts %>
+        <% elsif @range == "Word" %>
+          <h2>Word search for "<%="#{@word}"%>"</h2>
           <%= render 'public/posts/index', posts: @posts %>
         <% end %>
       </table>

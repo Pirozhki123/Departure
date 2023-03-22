@@ -32,7 +32,7 @@
         <div class="card-item pb-2">
           <%= @post.introduction %>
           <%= link_to public_customer_path(@post.customer), class: 'pl-2' do %>
-              <%= image_tag @post.customer.get_profile_image(25, 25), class: "img-thumbnail" %><%= @post.customer.name %>#<%= @post.customer.id %>
+            <%= image_tag @post.customer.get_profile_image(25, 25), class: "img-thumbnail" %><%= @post.customer.name %>#<%= @post.customer.id %>
           <% end %>
         </div>
         <div class="card-item pb-2" id="comments">

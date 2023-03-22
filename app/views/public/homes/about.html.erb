@@ -2,20 +2,31 @@
   <div class="row">
     <div class="col-md-12 text-center">
       <div class="fadeIn">
-        <h4>「Depature」は</h4><br>
+        <h4>「Depature」</h4><br>
         <p>あなたの旅立ちを手助けする写真SNSです</p>
       </div>
-      <div class="fadeIn delay-time02">
+      <div class="fadeIn delay-time04">
         <p>行きたい場所を探したり</p>
         <p>お気に入りの景色をシェアしたり</p>
         <p>旅の記録やフォトブックとして利用したり</p><br>
       </div>
-      <div class="fadeIn delay-time04">
+      <div class="fadeIn delay-time08">
         <p>コロナ禍による規制が緩和されつつある今</p>
         <p>新しい冒険に出かけてみませんか？</p>
       </div>
-      <div class="fadeUp delay-time06">
+      <div class="fadeUp delay-time12">
         <%= render 'public/posts/btn' %>
+        <p>投稿してみよう</p>
+      </div>
+      <div class="fadeUp delay-time14">
+        <div class ="text-center pt-2 pb-2 fadeIn">
+          <%= link_to public_customers_path do %>
+            <p class="h1 d-inline">
+              <i class="fa-solid fa-users" style="color: #0F428A;"></i>
+            </p>
+          <% end %>
+        </div>
+        <p>フォローしてみよう</p>
       </div>
     </div>
   </div>

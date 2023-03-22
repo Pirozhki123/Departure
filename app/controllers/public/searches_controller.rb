@@ -16,8 +16,6 @@ class Public::SearchesController < ApplicationController
       @posts.each do |post|
         @favorite_count = @favorite_count + post.favorites.count
       end
-    else
-      @posts = Post.all
     end
   end
 end
