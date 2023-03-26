@@ -10,7 +10,7 @@
             <h5 style="display: inline-block;" id="favorite_btn_<%= post.id %>">
               <%= render 'public/favorites/btn', post: post %>
             </h5>
-            <h5 style="display: inline-block;" class="card-title">
+            <h5 style="display: inline-block;" class="card-title text-truncate">
               <%= post.place.place_name %>
             </h5>
             <div class="card-item pb-4 text-truncate">
@@ -39,7 +39,9 @@
       </div>
     <% end %>
   </div>
-  <div class="row mx-auto">
-    <h3><%= paginate posts %></h3>
-  </div>
+  <% if posts.present? %>
+    <div class="row mx-auto">
+      <h3><%= paginate posts %></h3>
+    </div>
+  <% end %>
 </div>

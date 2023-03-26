@@ -49,6 +49,34 @@ class Post < ApplicationRecord
     end
   end
 
+  # def get_recommend(post_id) #ポスト関連におすすめ表示する必要がある場合の記述（見た目の都合上導入見送り中
+
+  #   post = Post.find(params[post_id])
+  #   tags = post.tags #上の投稿からタグを取得
+  #   recommend_posts = ""
+
+  #   if tags.present?
+  #     other_user_posts = Post.where.not(customer_id: current_customer.id) #自分以外の投稿一覧
+  #     tags.each do |tag| #タグに紐づく投稿を最大4つずつ取得
+  #       recommend = other_user_posts.left_joins(:tags).where("tags.tag LIKE?", "#{tag.tag}").order('random()').limit(4) #上記タグと一致する他ユーザーの投稿を１つ取得
+  #       if recommend_posts.present?
+  #         recommend_posts = recommend_posts + recommend
+  #       else
+  #         recommend_posts = recommend
+  #       end
+  #     end
+  #     recommend_posts = recommend_posts.uniq #重複する投稿を削除
+  #   end
+
+  #   if recommend_posts.count <= 4 #タグに紐づく投稿が4つ以上取得出来なかった場合
+  #     rand_posts_all = other_user_posts.where( 'id >= ?', rand(other_user_posts.first.id..other_user_posts.last.id) ).limit(4) #全体の投稿から4つランダムに取得
+  #     recommend_posts = recommend_posts + rand_posts_all #タグに紐づいた投稿とランダム取得投稿を足す
+  #     recommend_posts = recommend_posts.uniq #重複する投稿の削除
+  #   end
+
+  #   @recommends = recommend_posts.pop(4) #配列の先頭4つ以外を削除
+  # end
+
   def favorited_by?(customer)
     favorites.exists?(customer_id: customer.id)
   end
