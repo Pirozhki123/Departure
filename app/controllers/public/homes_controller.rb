@@ -33,9 +33,11 @@ class Public::HomesController < ApplicationController
         recommend_posts = recommend_posts + rand_posts_all #タグに紐づいた投稿とランダム取得投稿を足す
         recommend_posts = recommend_posts.uniq #重複する投稿の削除
       end
-      @recommends = recommend_posts.pop(4) #配列の先頭4つ以外を削除
-    else
+      @recommends = recommend_posts.shift(4) #配列の先頭4つ以外を削除
+    elsif @posts.present? #タイムラインに投稿がある場合
       @recommends = other_user_posts.where( 'id >= ?', rand(other_user_posts.first.id..other_user_posts.last.id) ).limit(4)
+    else
+     redirect_to public_homes_about_path #aboutページへ移動
     end
 
 
