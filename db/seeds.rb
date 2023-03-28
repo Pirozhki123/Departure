@@ -11,3 +11,9 @@ Admin.create!(
     {email: "test@test.com", password: "testtest"}
   ]
 )
+
+Customer.create!(
+  [
+    {email: "test@test.com", password: "testtest", name: "test", introduction: ""}
+  ]
+)
