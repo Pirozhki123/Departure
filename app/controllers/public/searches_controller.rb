@@ -2,8 +2,11 @@ class Public::SearchesController < ApplicationController
   before_action :authenticate_customer!
 
   def search
+
     @range = params[:range]
+
     @word = params[:word]
+
     if @range == "User"
       @customers = Customer.looks(params[:search], params[:word]).page(params[:page])
     elsif @range == "Word"
@@ -17,5 +20,6 @@ class Public::SearchesController < ApplicationController
         @favorite_count = @favorite_count + post.favorites.count
       end
     end
+
   end
 end

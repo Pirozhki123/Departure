@@ -1,21 +1,26 @@
 <div class="container fadeIn">
   <div class="row center-block">
     <div class="col-md-12">
+
       <div class="profile-group">
         <%= image_tag @customer.get_profile_image(100, 100), class: "profile_image" %>
       </div>
+
       <div class="profile-group">
         <h5>ユーザーネーム</h5>
         <%= @customer.name %>
       </div>
+
       <div class="profile-group">
         <h5>メールアドレス</h5>
         <%= @customer.email %>
       </div>
+
       <div class="profile-group">
         <h5>紹介文</h5>
         <%= @customer.introduction %>
-            </div>
+      </div>
+
       <div class="profile-group">
         <h5>非公開設定</h5>
         <% if @customer.private == false %>
@@ -24,6 +29,7 @@
           <p>非公開</p>
         <% end %>
       </div>
+
       <%= form_with model: @customer, url: admin_customer_path do |f| %>
         <div class="form-group">
           <h5>退会設定</h5>
@@ -32,10 +38,12 @@
           <%= f.radio_button :is_deleted, :true %>
           <%= f.label :is_deleted, "退会済み", {value: :true, style: "display: inline-block;"} %>
         </div>
+
         <div class="form-group">
           <%= f.submit class: 'btn btn-success' %>
         </div>
       <% end %>
+
     </div>
   </div>
 </div>

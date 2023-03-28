@@ -1,40 +1,44 @@
 <div class="card-deck mx-auto col-md-6 fadeIn">
   <div class="card mt-2 mb-2 shadow-sm text-center fadeIn">
-  <div class="profile-group customer_image">
-    <%= image_tag customer.get_profile_image(192, 108), class: "profile_image" %>
-  </div>
-  <div class="profile-group customer_introduction">
-    <h5>
-      <%= customer.name %>#<%= customer.id %>
-      <% if customer.private == true %>
-        <i class="fa-solid fa-lock"></i>
-      <% end %>
-    </5>
-  </div>
-  <div class="profile-group customer_introduction">
-    <p>
-      <%= customer.introduction %>
-    </p>
-  </div>
-  <div class="profile-group customer_name mx-auto">
-    <h5>
-      <% if customer != current_customer %>
-        <%= render 'public/relationships/btn', customer: customer %>
-      <% else %>
-        <%= link_to edit_public_customer_path(customer), class: "btn btn-outline-secondary btn-block btn-sm" do %>
-          <i class="fas fa-user-cog"></i>
+    <div class="profile-group customer_image">
+      <%= image_tag customer.get_profile_image(192, 108), class: "profile_image" %>
+    </div>
+
+    <div class="profile-group customer_introduction">
+      <h5>
+        <%= customer.name %>#<%= customer.id %>
+        <% if customer.private == true %>
+          <i class="fa-solid fa-lock"></i>
         <% end %>
+      </5>
+    </div>
+
+    <div class="profile-group customer_introduction">
+      <p>
+        <%= customer.introduction %>
+      </p>
+    </div>
+
+    <div class="profile-group customer_name mx-auto">
+      <h5>
+        <% if customer != current_customer %>
+          <%= render 'public/relationships/btn', customer: customer %>
+        <% else %>
+          <%= link_to edit_public_customer_path(customer), class: "btn btn-outline-secondary btn-block btn-sm" do %>
+            <i class="fas fa-user-cog"></i>
+          <% end %>
+        <% end %>
+      </h5>
+    </div>
+
+    <div class="profile-group profile_follow btn-group btn-group-sm">
+      <%= link_to public_customer_followings_path(customer), class: 'btn btn-outline-info' do %>
+        フォロー : <%= customer.followings.count %>
       <% end %>
-    </h5>
-  </div>
-  <div class="profile-group profile_follow btn-group btn-group-sm">
-    <%= link_to public_customer_followings_path(customer), class: 'btn btn-outline-info' do %>
-      フォロー : <%= customer.followings.count %>
-    <% end %>
-    <%= link_to public_customer_followers_path(customer), class: 'btn btn-outline-info' do %>
-      フォロワー : <%= customer.followers.count %>
-    <% end %>
-    <%= link_to "いいね一覧", favorite_posts_public_customer_path(params[:id]), class: 'btn btn-outline-info' %>
-  </div>
+      <%= link_to public_customer_followers_path(customer), class: 'btn btn-outline-info' do %>
+        フォロワー : <%= customer.followers.count %>
+      <% end %>
+      <%= link_to "いいね一覧", favorite_posts_public_customer_path(params[:id]), class: 'btn btn-outline-info' %>
+    </div>
   </div>
 </div>

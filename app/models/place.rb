@@ -15,8 +15,6 @@ class Place < ApplicationRecord
     else
       place = Post.left_joins(:place).all
     end
-
-    # return place.inject(init = []) {|result, place| result + place.posts}
-
   end
+
 end

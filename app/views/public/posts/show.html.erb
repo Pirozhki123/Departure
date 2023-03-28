@@ -6,6 +6,7 @@
       <% else %>
         <%= image_tag 'no_image', class: 'img-fluid fadeIn' %>
       <% end %>
+
       <div class="card-body">
         <h3 class="card-title">
           <h3 style="display: inline-block;">
@@ -17,6 +18,7 @@
             <%= render 'public/favorites/btn', post: @post %>
           </h3>
         </h3>
+
         <div class="card-item pb-4">
           <% post_tags = @post.tags %>
             <% post_tags.each do |tag| %>
@@ -29,21 +31,25 @@
             <%= link_to "投稿削除", public_post_path(@post), method: :delete, class: 'btn btn-danger btn-sm', "data-confirm" => "本当に削除しますか？" %>
           <% end %>
         </div>
+
         <div class="card-item pb-2">
           <%= @post.introduction %>
           <%= link_to public_customer_path(@post.customer), class: 'pl-2' do %>
             <%= image_tag @post.customer.get_profile_image(25, 25), class: "img-thumbnail" %><%= @post.customer.name %>#<%= @post.customer.id %>
           <% end %>
         </div>
+
         <div class="card-item pb-2" id="comments">
           <%= render 'public/comments/comments', post: @post %>
         </div>
+
         <div class="card-item">
           <%= form_with model: @comment, url: public_post_comments_path(@post), local: false do |f| %>
             <%= f.text_area :body, rows: '2', placeholder: "コメント", class: "col-md-6" %><br>
             <%= f.submit "送信" %>
           <% end %>
         </div>
+
       </div>
     </div>
   </div>

@@ -58,6 +58,7 @@ class Public::PostsController < ApplicationController
     else
       render "public/posts/new"
     end
+    
   end
 
   def destroy

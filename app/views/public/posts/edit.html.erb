@@ -6,11 +6,13 @@
       <% else %>
         <%= image_tag 'no_image', class: 'img-fluid' %>
       <% end %>
+
       <div class="card-body">
         <h3 class="card-title">
           <%= @post.place.place_name %>
           <%= render 'public/favorites/btn', post: @post %>
         </h3>
+
         <div class="card-item pb-4">
           <%= form_with model: @post, url: public_post_path, method: :patch, local: true do |f| %>
             <div class="form-group">
@@ -21,12 +23,14 @@
             </div>
           <% end %>
         </div>
+
         <div class="card-item pb-2">
           <%= @post.introduction %>
           <%= link_to public_customer_path(@post.customer), class: 'pl-2' do %>
               <%= image_tag @post.customer.get_profile_image(25, 25), class: "img-thumbnail" %><%= @post.customer.name %>#<%= @post.customer.id %>
           <% end %>
         </div>
+
         <div class="card-item pb-2">
           <% @post.comments.each do |comment| %>
             <div class="comment pb-2">
@@ -37,12 +41,14 @@
             </div>
           <% end %>
         </div>
+
         <div class="card-item">
           <%= form_with model: @comment, url: public_post_comments_path(@post) do |f| %>
             <%= f.text_area :body, rows: '2', placeholder: "コメント", class: "col-md-6" %><br>
             <%= f.submit "送信" %>
           <% end %>
         </div>
+
       </div>
     </div>
   </div>
