@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
-  before_action :find_customer, only: [:show, :edit, :favorite_posts]
+  before_action :find_customer, only: [:show, :edit, :update, :favorite_posts]
   before_action :is_matching_login_customer, only: [:edit, :update]
 
   def show
