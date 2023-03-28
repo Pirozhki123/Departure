@@ -1,12 +1,12 @@
 class Admin::CustomerController < ApplicationController
   before_action :authenticate_admin!
+  before_action :find_customer, only: [:show, :update]
 
   def index
     @customers = Customer.all
   end
 
   def show
-    @customer = Customer.find(params[:id])
     @posts = @customer.posts.page(params[:page])
   end
 
@@ -14,7 +14,6 @@ class Admin::CustomerController < ApplicationController
   end
 
   def update
-    @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
       redirect_to admin_customer_index_path(@customer), notice: "更新に成功しました"
     else
@@ -22,7 +21,11 @@ class Admin::CustomerController < ApplicationController
     end
   end
 
-  private
+private
+
+  def find_customer
+    @customer = Customer.find(params[:id])
+  end
 
   def customer_params
     params.require(:customer).permit(:is_deleted)

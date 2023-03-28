@@ -1,5 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_customer!
+  before_action :find_post, only: [:show, :edit, :update]
 
   def index
     @post = Post.new
@@ -12,16 +13,13 @@ class Public::PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @comment = Comment.new
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
     tag_list = params[:post][:tag].delete(" ").delete("　").split(",")#送られたtag情報を「,」で区切ってスペースを削除
     if @post.update(post_params)
       @post.save_tags(tag_list) #save_tagsメソッドを実行（モデルに記載）
@@ -36,8 +34,32 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @posts = Post.all.page(params[:page])
     @post.customer_id = current_customer.id
-    
     #場所の保存処理
+    save_place
+    # #タグの保存処理
+    tag_list = params[:post][:tag].delete(" ").delete("　").split(",")#送られたtag情報を「,」で区切ってスペースを削除
+    if @post.save
+      @post.save_tags(tag_list) #save_tagsメソッドを実行（モデルに記載）
+      redirect_to root_path, notice: "投稿しました"
+    else
+      render "public/posts/new"
+    end
+
+  end
+
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+    redirect_to root_path, notice: "投稿を削除しました"
+  end
+
+private
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
+
+  def save_place #場所の保存処理
     place_name = params[:post][:place]
     place_present = Place.where(place_name: place_name)
     if place_present.blank?
@@ -50,28 +72,7 @@ class Public::PostsController < ApplicationController
       place_id = place.id
     end
     @post.place_id = place_id
-    # #タグの保存処理
-    tag_list = params[:post][:tag].delete(" ").delete("　").split(",")#送られたtag情報を「,」で区切ってスペースを削除
-    if @post.save
-      @post.save_tags(tag_list) #save_tagsメソッドを実行（モデルに記載）
-      redirect_to root_path, notice: "投稿しました"
-    else
-      render "public/posts/new"
-    end
-    
   end
-
-  def destroy
-    post = Post.find(params[:id])
-    post.destroy
-    redirect_to root_path, notice: "投稿を削除しました"
-  end
-
-  def edit
-    @post = Post.find(params[:id])
-  end
-
-  private
 
   def post_params
     params.require(:post).permit(:image, :introduction)

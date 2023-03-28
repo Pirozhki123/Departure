@@ -8,6 +8,15 @@ class Public::HomesController < ApplicationController
     @posts = Post.where(customer_id: customer_ids).order(created_at: :desc).page(params[:page]) #取得したユーザーidの投稿を取得
 
     #おすすめ取得処理
+    recommendt_to_get_from_post
+  end
+
+  def about
+  end
+
+private
+
+  def recommendt_to_get_from_post #おすすめ取得処理
     rand_post = Post.where(customer_id: current_customer.id).order("random()").first #自投稿をランダムに1つ取得
     other_user_posts = Post.where.not(customer_id: current_customer.id) #自分以外の投稿一覧
     if rand_post.present? #自分の投稿がある場合
@@ -38,10 +47,6 @@ class Public::HomesController < ApplicationController
     else
      redirect_to public_homes_about_path #aboutページへ移動
     end
-
   end
 
-
-  def about
-  end
 end

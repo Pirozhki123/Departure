@@ -22,4 +22,5 @@ class Public::SearchesController < ApplicationController
     end
 
   end
+
 end
