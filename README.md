@@ -43,6 +43,5 @@
 - IDE：Cloud9
 
 ## 使用素材
-- Google Maps API（※日数に余裕があれば）
 - Adobe Express
 - Google Fonts
