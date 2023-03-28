@@ -31,10 +31,12 @@ class Public::PostsController < ApplicationController
     end
   end
 
+
   def create
     @post = Post.new(post_params)
     @posts = Post.all.page(params[:page])
     @post.customer_id = current_customer.id
+    
     #場所の保存処理
     place_name = params[:post][:place]
     place_present = Place.where(place_name: place_name)

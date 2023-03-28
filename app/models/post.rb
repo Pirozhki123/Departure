@@ -49,8 +49,8 @@ class Post < ApplicationRecord
     end
   end
 
-  # def get_recommend(post_id) #ポスト関連におすすめ表示する必要がある場合の記述（見た目の都合上導入見送り中
-
+  #ポスト関連におすすめ表示する必要がある場合の記述（見た目の都合上導入見送り中）
+  # def get_recommend(post_id)
   #   post = Post.find(params[post_id])
   #   tags = post.tags #上の投稿からタグを取得
   #   recommend_posts = ""

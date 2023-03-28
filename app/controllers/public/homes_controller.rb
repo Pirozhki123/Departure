@@ -9,6 +9,7 @@ class Public::HomesController < ApplicationController
 
     rand_post = Post.where(customer_id: current_customer.id).order('random()').first #自投稿をランダムに1つ取得
 
+    #おすすめ投稿取得処理
     if rand_post.present? #自分の投稿がある場合
       recommend_posts = ""
       rand_tags = rand_post.tags #上の投稿からタグを取得
@@ -24,10 +25,10 @@ class Public::HomesController < ApplicationController
             recommend_posts = recommend
           end
         end
+
         recommend_posts = recommend_posts.uniq #重複する投稿を削除
       end
     end
-
     if recommend_posts.count <= 4 #タグに紐づく投稿が4つ以上取得出来なかった場合
       rand_posts_all = other_user_posts.where( 'id >= ?', rand(other_user_posts.first.id..other_user_posts.last.id) ).limit(4) #全体の投稿から4つランダムに取得
       recommend_posts = recommend_posts + rand_posts_all #タグに紐づいた投稿とランダム取得投稿を足す
