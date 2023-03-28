@@ -8,6 +8,6 @@
 
 Admin.create!(
   [
-    {email: 'test@test.com', password: 'testtest'}
+    {email: "test@test.com", password: "testtest"}
   ]
 )

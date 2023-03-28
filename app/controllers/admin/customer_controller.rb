@@ -18,7 +18,7 @@ class Admin::CustomerController < ApplicationController
     if @customer.update(customer_params)
       redirect_to admin_customer_index_path(@customer), notice: "更新に成功しました"
     else
-      render 'admin/customer/edit', notice: "更新に失敗しました"
+      render "admin/customer/edit", notice: "更新に失敗しました"
     end
   end
 

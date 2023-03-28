@@ -4,7 +4,7 @@ class Public::PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.all.order(updated_at: :desc).page(params[:page])
-    @tag_list = @post.tags.pluck(:tag).join(',')
+    @tag_list = @post.tags.pluck(:tag).join(",")
   end
 
   def new
@@ -22,12 +22,12 @@ class Public::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    tag_list = params[:post][:tag].delete(' ').delete('　').split(',')#送られたtag情報を「,」で区切ってスペースを削除
+    tag_list = params[:post][:tag].delete(" ").delete("　").split(",")#送られたtag情報を「,」で区切ってスペースを削除
     if @post.update(post_params)
       @post.save_tags(tag_list) #save_tagsメソッドを実行（モデルに記載）
       redirect_to public_post_path(@post), notice: "編集が完了しました"
     else
-      render 'public/homes/top'
+      render "public/homes/top"
     end
   end
 
@@ -46,17 +46,17 @@ class Public::PostsController < ApplicationController
       @post.place.save
       place_id = @post.place.id
     else
-      place = Place.where(place_name: place_name).order('created_at DESC').first
+      place = Place.where(place_name: place_name).order("created_at DESC").first
       place_id = place.id
     end
     @post.place_id = place_id
     # #タグの保存処理
-    tag_list = params[:post][:tag].delete(' ').delete('　').split(',')#送られたtag情報を「,」で区切ってスペースを削除
+    tag_list = params[:post][:tag].delete(" ").delete("　").split(",")#送られたtag情報を「,」で区切ってスペースを削除
     if @post.save
       @post.save_tags(tag_list) #save_tagsメソッドを実行（モデルに記載）
       redirect_to root_path, notice: "投稿しました"
     else
-      render 'public/posts/new'
+      render "public/posts/new"
     end
   end
 
