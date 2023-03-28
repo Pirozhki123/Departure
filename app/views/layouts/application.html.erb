@@ -25,12 +25,16 @@
 
   <body class="body">
     <%= render 'layouts/header' %>
+
     <% if notice.present? %>
       <p class="notice text-center text-white"><%= notice %></p>
     <% end %>
+
     <% if alert.present? %>
       <p class="alert text-center text-white"><%= alert %></p>
     <% end %>
+
     <%=yield %>
+
   </body>
 </html>
