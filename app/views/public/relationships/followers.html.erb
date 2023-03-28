@@ -1,7 +1,10 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
+    <%= render 'public/customers/profile', customer: @customer %>
+  </div>
+  <div class="row">
     <div class="col-md-12">
-      <h2 class="text-center fadeIn"><%= @customer.name %>のフォロワー一覧</h2>
+      <h2 class="text-center fadeIn text-white"><%= @customer.name %>のフォロワー一覧</h2>
       <% if @customers.present? %>
         <%= render 'public/customers/index',customers: @customers %>
       <% else %>

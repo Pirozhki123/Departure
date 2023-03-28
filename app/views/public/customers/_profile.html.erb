@@ -38,7 +38,7 @@
       <%= link_to public_customer_followers_path(customer), class: 'btn btn-outline-info' do %>
         フォロワー : <%= customer.followers.count %>
       <% end %>
-      <%= link_to "いいね一覧", favorite_posts_public_customer_path(params[:id]), class: 'btn btn-outline-info' %>
+      <%= link_to "いいね一覧", favorite_posts_public_customer_path(customer), class: 'btn btn-outline-info' %>
     </div>
   </div>
 </div>
