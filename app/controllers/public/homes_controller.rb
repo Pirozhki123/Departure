@@ -25,7 +25,7 @@ private
 
       if rand_tags.present?
         rand_tags.each do |rand_tag| #タグに紐づく投稿を最大4つずつ取得
-          recommend = other_user_posts.left_joins(:tags).where("tags.tag LIKE?", "#{rand_tag.tag}").order("rand()").limit(4) #上記タグと一致する他ユーザーの投稿を１つ取得
+          recommend = other_user_posts.left_joins(:tags).where("tags.tag LIKE?", "#{rand_tag.tag}").order("rand()").limit(4) #上記タグと一致する他ユーザーの投稿を１つ取得 ※SQQLightではrandom()、MySQLではrand()を使用
           if recommend_posts.present?
             recommend_posts = recommend_posts + recommend
           else
@@ -36,7 +36,7 @@ private
       end
 
       if recommend_posts.count <= 4 #タグに紐づく投稿が4つ以上取得出来なかった場合
-        rand_posts_all = other_user_posts.where( "id >= ?", rand(other_user_posts.first.id..other_user_posts.last.id) ).limit(4) #全体の投稿から4つランダムに取得
+        rand_posts_all = other_user_posts.where( "id >= ?", rand(other_user_posts.first.id..other_user_posts.last.id) ).limit(4) #全体の投稿から4つランダムに取得 ※SQQLightではrandom()、MySQLではrand()を使用
         recommend_posts = recommend_posts + rand_posts_all #タグに紐づいた投稿とランダム取得投稿を足す
         recommend_posts = recommend_posts.uniq #重複する投稿の削除
       end
