@@ -36,11 +36,20 @@ class Public::PostsController < ApplicationController
     @post.customer_id = current_customer.id
     #場所の保存処理
     save_place
-    # #タグの保存処理
+    #タグの保存処理
     tag_list = params[:post][:tag].delete(" ").delete("　").split(",")#送られたtag情報を「,」で区切ってスペースを削除
+
     if @post.save
+      #Vision APIを利用したタグ追加処理
+      vision_tags = Vision.get_image_data(@post.image)
+      if tag_list.present?
+        tag_list = tag_list + vision_tags
+      else
+        tag_list = vision_tags
+      end
+
       @post.save_tags(tag_list) #save_tagsメソッドを実行（モデルに記載）
-      redirect_to root_path, notice: "投稿しました"
+      redirect_to root_path, notice: "投稿しました #{vision_tags}"
     else
       render "public/posts/new"
     end

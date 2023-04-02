@@ -17,8 +17,8 @@ class Public::HomesController < ApplicationController
 private
 
   def recommendt_to_get_from_post #おすすめ取得処理
-    rand_post = Post.where(customer_id: current_customer.id).order("rand()").first #自投稿をランダムに1つ取得
-    # rand_post = Post.where(customer_id: current_customer.id).order("random()").first #自投稿をランダムに1つ取得
+    # rand_post = Post.where(customer_id: current_customer.id).order("rand()").first #自投稿をランダムに1つ取得
+    rand_post = Post.where(customer_id: current_customer.id).order("random()").first #自投稿をランダムに1つ取得
     other_user_posts = Post.where.not(customer_id: current_customer.id) #自分以外の投稿一覧
     if rand_post.present? #自分の投稿がある場合
       recommend_posts = ""
@@ -26,8 +26,8 @@ private
 
       if rand_tags.present?
         rand_tags.each do |rand_tag| #タグに紐づく投稿を最大4つずつ取得
-          recommend = other_user_posts.left_joins(:tags).where("tags.tag LIKE?", "#{rand_tag.tag}").order("rand()").limit(4) #上記タグと一致する他ユーザーの投稿を１つ取得 ※SQQLightではrandom()、MySQLではrand()を使用
-          # recommend = other_user_posts.left_joins(:tags).where("tags.tag LIKE?", "#{rand_tag.tag}").order("random()").limit(4) #上記タグと一致する他ユーザーの投稿を１つ取得 ※SQQLightではrandom()、MySQLではrand()を使用
+          # recommend = other_user_posts.left_joins(:tags).where("tags.tag LIKE?", "#{rand_tag.tag}").order("rand()").limit(4) #上記タグと一致する他ユーザーの投稿を１つ取得 ※SQQLightではrandom()、MySQLではrand()を使用
+          recommend = other_user_posts.left_joins(:tags).where("tags.tag LIKE?", "#{rand_tag.tag}").order("random()").limit(4) #上記タグと一致する他ユーザーの投稿を１つ取得 ※SQQLightではrandom()、MySQLではrand()を使用
           if recommend_posts.present?
             recommend_posts = recommend_posts + recommend
           else
