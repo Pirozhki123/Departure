@@ -49,7 +49,7 @@ class Public::PostsController < ApplicationController
       end
 
       @post.save_tags(tag_list) #save_tagsメソッドを実行（モデルに記載）
-      redirect_to root_path, notice: "投稿しました #{vision_tags}"
+      redirect_to root_path, notice: "投稿しました"
     else
       render "public/posts/new"
     end
