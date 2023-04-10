@@ -33,10 +33,9 @@
 - 検索機能
 - おすすめ機能
 - フォロー機能
-- DM機能
 
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Amazon Linux release 2 (Karoo)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
@@ -45,3 +44,4 @@
 ## 使用素材
 - Adobe Express
 - Google Fonts
+- Google Vision API
