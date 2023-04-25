@@ -19,13 +19,14 @@
               <%= post.place.place_name %>
             </h5>
 
-            <div class="card-item pb-4 text-truncate">
+            <div class="card-item text-truncate">
               <% post_tags = post.tags %>
               <% post_tags.each do |tag| %>
                 <%= link_to  public_search_path(word: tag.tag, range:"Tag", search: "perfect_match"), class: 'btn btn-outline-secondary btn-sm pr-2' do %>
                   <%= tag.tag %><%= "(#{tag.posts.count})" %>
                 <% end %>
               <% end %>
+              <p class="created_at"><%= l post.created_at %></p>
             </div>
 
             <div class="card-item d-flex justify-content-between align-items-center">
