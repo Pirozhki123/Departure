@@ -16,6 +16,6 @@ class Tag < ApplicationRecord
     else
       tags = Post.left_joins(:tags).all
     end
-
+    tags = tags.distinct
   end
 end
