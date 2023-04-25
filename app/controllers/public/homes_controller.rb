@@ -56,6 +56,6 @@ private
     else
      redirect_to public_homes_about_path #aboutページへ移動
     end
-  end 
+  end
 
 end
