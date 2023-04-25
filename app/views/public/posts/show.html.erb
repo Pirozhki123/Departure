@@ -19,6 +19,8 @@
           </h3>
         </h3>
 
+        <p class="created_at"><%= l @post.created_at %></p>
+
         <div class="card-item pb-4">
           <% post_tags = @post.tags %>
             <% post_tags.each do |tag| %>
