@@ -5,7 +5,7 @@
     <% end %>
     <%= comment.body %>
     <% if comment.customer == current_customer %>
-      <%= link_to "消去", public_post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
+      <%= link_to "消去", public_post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-sm btn-danger", "data-confirm" => "本当に削除しますか？" %>
     <% end %>
   </div>
 <% end %>
