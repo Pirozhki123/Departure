@@ -12,25 +12,25 @@
       <% customers.each do |customer| %>
         <tr>
           <td>
-            <%= link_to public_customer_path(customer) do %>
+            <%= link_to customer_path(customer) do %>
               <%= image_tag customer.get_profile_image(50, 50), class: "index_profile_image" %>
             <% end %>
           </td>
 
           <td>
-            <%= link_to public_customer_path(customer) do %>
+            <%= link_to customer_path(customer) do %>
               <%= customer.name %>
             <% end %>
           </td>
 
           <td>
-            <%= link_to public_customer_followings_path(customer) do %>
+            <%= link_to customer_followings_path(customer) do %>
               フォロー : <%= customer.followings.count %>
             <% end %>
           </td>
 
           <td>
-            <%= link_to public_customer_followers_path(customer) do %>
+            <%= link_to customer_followers_path(customer) do %>
               フォロワー : <%= customer.followers.count %>
             <% end %>
           </td>

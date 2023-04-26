@@ -16,7 +16,7 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer.update(customer_params)
-    redirect_to public_customer_path(@customer)
+    redirect_to customer_path(@customer)
   end
 
   def favorite_posts #ユーザーがいいねした投稿一覧

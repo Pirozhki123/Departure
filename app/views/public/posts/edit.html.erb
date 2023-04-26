@@ -14,7 +14,7 @@
         </h3>
 
         <div class="card-item pb-4">
-          <%= form_with model: @post, url: public_post_path, method: :patch, local: true do |f| %>
+          <%= form_with model: @post, url: post_path, method: :patch, local: true do |f| %>
             <div class="form-group">
               <% @tag_list = @post.tags.pluck(:tag).join(',') %>
               <%= f.text_field :tag, value: @tag_list, placeholder: "タグ（タグ1,タグ2,~）" %>
@@ -26,7 +26,7 @@
 
         <div class="card-item pb-2">
           <%= @post.introduction %>
-          <%= link_to public_customer_path(@post.customer), class: 'pl-2' do %>
+          <%= link_to customer_path(@post.customer), class: 'pl-2' do %>
               <%= image_tag @post.customer.get_profile_image(25, 25), class: "img-thumbnail" %><%= @post.customer.name %>#<%= @post.customer.id %>
           <% end %>
         </div>
@@ -34,7 +34,7 @@
         <div class="card-item pb-2">
           <% @post.comments.each do |comment| %>
             <div class="comment pb-2">
-              <%= link_to public_customer_path(comment.customer), class: 'pr-2' do %>
+              <%= link_to customer_path(comment.customer), class: 'pr-2' do %>
                 <%= image_tag comment.customer.get_profile_image(25, 25), class: "img-thumbnail" %>
               <% end %>
               <%= comment.body %>
@@ -43,7 +43,7 @@
         </div>
 
         <div class="card-item">
-          <%= form_with model: @comment, url: public_post_comments_path(@post) do |f| %>
+          <%= form_with model: @comment, url: post_comments_path(@post) do |f| %>
             <%= f.text_area :body, rows: '2', placeholder: "コメント", class: "col-md-6" %><br>
             <%= f.submit "送信" %>
           <% end %>

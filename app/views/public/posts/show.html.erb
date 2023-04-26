@@ -10,7 +10,7 @@
       <div class="card-body">
         <h3 class="card-title">
           <h3 style="display: inline-block;">
-            <%= link_to  public_search_path(word: @post.place.place_name, range:"Place", search: "perfect_match"), class: 'pr-2' do %>
+            <%= link_to  search_path(word: @post.place.place_name, range:"Place", search: "perfect_match"), class: 'pr-2' do %>
               <%= @post.place.place_name %>
             <% end %>
           </h3>
@@ -24,19 +24,19 @@
         <div class="card-item pb-4">
           <% post_tags = @post.tags %>
             <% post_tags.each do |tag| %>
-              <%= link_to  public_search_path(word: tag.tag, range:"Tag", search: "perfect_match"), class: 'btn btn-outline-secondary btn-sm pr-2' do %>
+              <%= link_to  search_path(word: tag.tag, range:"Tag", search: "perfect_match"), class: 'btn btn-outline-secondary btn-sm pr-2' do %>
               <%= tag.tag %><%= "(#{tag.posts.count})" %>
             <% end %>
           <% end %>
-          <%= link_to "タグ編集", edit_public_post_path(@post), class: 'btn btn-secondary btn-sm' %>
+          <%= link_to "タグ編集", edit_post_path(@post), class: 'btn btn-secondary btn-sm' %>
           <% if @post.customer == current_customer %>
-            <%= link_to "投稿削除", public_post_path(@post), method: :delete, class: 'btn btn-danger btn-sm', "data-confirm" => "本当に削除しますか？" %>
+            <%= link_to "投稿削除", post_path(@post), method: :delete, class: 'btn btn-danger btn-sm', "data-confirm" => "本当に削除しますか？" %>
           <% end %>
         </div>
 
         <div class="card-item pb-2">
           <%= @post.introduction %>
-          <%= link_to public_customer_path(@post.customer), class: 'pl-2' do %>
+          <%= link_to customer_path(@post.customer), class: 'pl-2' do %>
             <%= image_tag @post.customer.get_profile_image(25, 25), class: "img-thumbnail" %><%= @post.customer.name %>#<%= @post.customer.id %>
           <% end %>
         </div>
@@ -46,7 +46,7 @@
         </div>
 
         <div class="card-item">
-          <%= form_with model: @comment, url: public_post_comments_path(@post), local: false do |f| %>
+          <%= form_with model: @comment, url: post_comments_path(@post), local: false do |f| %>
             <%= f.text_area :body, rows: '2', placeholder: "コメント", class: "col-md-6" %><br>
             <%= f.submit "送信" %>
           <% end %>

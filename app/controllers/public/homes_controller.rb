@@ -54,7 +54,7 @@ private
     elsif @posts.present? #タイムラインに投稿がある場合
       @recommends = other_user_posts.where( "id >= ?", rand(other_user_posts.first.id..other_user_posts.last.id) ).limit(4)
     else
-     redirect_to public_homes_about_path #aboutページへ移動
+     redirect_to about_path #aboutページへ移動
     end
   end
 

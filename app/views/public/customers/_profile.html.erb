@@ -24,7 +24,7 @@
         <% if customer != current_customer %>
           <%= render 'public/relationships/btn', customer: customer %>
         <% else %>
-          <%= link_to edit_public_customer_path(customer), class: "btn btn-outline-secondary btn-block btn-sm" do %>
+          <%= link_to edit_customer_path(customer), class: "btn btn-outline-secondary btn-block btn-sm" do %>
             <i class="fas fa-user-cog"></i>
           <% end %>
         <% end %>
@@ -32,13 +32,13 @@
     </div>
 
     <div class="profile-group profile_follow btn-group btn-group-sm">
-      <%= link_to public_customer_followings_path(customer), class: 'btn btn-outline-info' do %>
+      <%= link_to customer_followings_path(customer), class: 'btn btn-outline-info' do %>
         フォロー : <%= customer.followings.count %>
       <% end %>
-      <%= link_to public_customer_followers_path(customer), class: 'btn btn-outline-info' do %>
+      <%= link_to customer_followers_path(customer), class: 'btn btn-outline-info' do %>
         フォロワー : <%= customer.followers.count %>
       <% end %>
-      <%= link_to "いいね一覧", favorite_posts_public_customer_path(customer), class: 'btn btn-outline-info' %>
+      <%= link_to "いいね一覧", favorite_posts_customer_path(customer), class: 'btn btn-outline-info' %>
     </div>
   </div>
 </div>

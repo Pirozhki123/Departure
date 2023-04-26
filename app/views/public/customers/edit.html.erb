@@ -2,7 +2,7 @@
   <div class="row fadeIn">
     <div class="col-md-12 text-white">
 
-      <%= form_with model: @customer, url: public_customer_path do |f| %>
+      <%= form_with model: @customer, url: customer_path do |f| %>
         <div class="profile-group row">
           <dt class="col-2 text-right"></dt>
           <dd class="col-7"><%= image_tag @customer.get_profile_image(192, 108), class: "profile_image" %></dd>

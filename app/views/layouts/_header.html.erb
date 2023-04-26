@@ -11,32 +11,32 @@
       <div class="collapse navbar-collapse  justify-content-end" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item ml-2">
-            <%= link_to public_homes_about_path, class: 'nav-link' do %>
+            <%= link_to about_path, class: 'nav-link' do %>
               <i class="fa-solid fa-circle-question"></i> About
             <% end %>
           </li>
 
           <li class="nav-item ml-2">
-            <%= link_to public_search_path, class: 'nav-link' do %>
+            <%= link_to search_path, class: 'nav-link' do %>
               <i class="fa-solid fa-magnifying-glass"></i> 検索
             <% end %>
           </li>
 
           <li class="nav-item ml-2">
-            <%= link_to public_posts_path, class: 'nav-link' do %>
+            <%= link_to posts_path, class: 'nav-link' do %>
               <i class="fa-solid fa-camera"></i> 投稿一覧
             <% end %>
           </li>
 
           <li class="nav-item ml-2">
-            <%= link_to public_customers_path, class: 'nav-link' do %>
+            <%= link_to customers_path, class: 'nav-link' do %>
               <i class="fa-solid fa-users"></i> ユーザー一覧
             <% end %>
           </li>
 
           <%if customer_signed_in? %>
             <li class="nav-item ml-2">
-              <%= link_to public_customer_path(current_customer), class: 'nav-link' do %>
+              <%= link_to customer_path(current_customer), class: 'nav-link' do %>
                 <i class="fa-solid fa-user"></i> マイページ
               <% end %>
             </li>
