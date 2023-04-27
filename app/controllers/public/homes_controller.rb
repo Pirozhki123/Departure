@@ -16,7 +16,8 @@ class Public::HomesController < ApplicationController
 
 private
 
-  def recommendt_to_get_from_post #おすすめ取得処理
+  #おすすめ取得処理
+  def recommendt_to_get_from_post
     if Rails.env.production?
       rand_post = Post.where(customer_id: current_customer.id).order("rand()").first #自投稿をランダムに1つ取得
     else
