@@ -45,3 +45,4 @@
 - Adobe Express
 - Google Fonts
 - Google Vision API
+- お名前.com
