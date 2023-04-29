@@ -5,6 +5,7 @@ class Public::PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.all.order(updated_at: :desc).page(params[:page])
+    #タグを","で区切って一つにまとめる
     @tag_list = @post.tags.pluck(:tag).join(",")
   end
 
@@ -20,9 +21,11 @@ class Public::PostsController < ApplicationController
   end
 
   def update
-    tag_list = params[:post][:tag].delete(" ").delete("　").split(",")#送られたtag情報を「,」で区切ってスペースを削除
+    #送られたtag情報を「,」で区切ってスペースを削除
+    tag_list = params[:post][:tag].delete(" ").delete("　").split(",")
     if @post.update(post_params)
-      @post.save_tags(tag_list) #save_tagsメソッドを実行（モデルに記載）
+      #save_tagsメソッドを実行（詳細はpostモデルに記載）
+      @post.save_tags(tag_list)
       redirect_to post_path(@post), notice: "編集が完了しました"
     else
       render "public/homes/top"
@@ -34,10 +37,10 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @posts = Post.all.page(params[:page])
     @post.customer_id = current_customer.id
-    #場所の保存処理
+    #場所の保存処理(処理内容は下にまとめてある)
     save_place
-    #タグの保存処理
-    tag_list = params[:post][:tag].delete(" ").delete("　").split(",")#送られたtag情報を「,」で区切ってスペースを削除
+    #タグの保存処理。送られたtag情報を「,」で区切ってスペースを削除。
+    tag_list = params[:post][:tag].delete(" ").delete("　").split(",")
 
     if @post.save
       #Vision APIを利用したタグ追加処理
@@ -48,7 +51,8 @@ class Public::PostsController < ApplicationController
         tag_list = vision_tags
       end
 
-      @post.save_tags(tag_list) #save_tagsメソッドを実行（モデルに記載）
+      #save_tagsメソッドを実行（モデルに記載）
+      @post.save_tags(tag_list)
       redirect_to root_path, notice: "投稿しました"
     else
       render "public/posts/new"
@@ -68,18 +72,23 @@ private
     @post = Post.find(params[:id])
   end
 
-  def save_place #場所の保存処理
+  #場所の保存処理
+  def save_place
+    # 入力された場所名が登録されていないか確認
     place_name = params[:post][:place]
     place_present = Place.where(place_name: place_name)
+    #場所名が登録されていなければ新たに登録
     if place_present.blank?
       @post.place = Place.new
       @post.place.place_name = place_name
       @post.place.save
       place_id = @post.place.id
+    #場所名が登録されていればIDを検索
     else
       place = Place.where(place_name: place_name).order("created_at DESC").first
       place_id = place.id
     end
+    #投稿と場所IDを紐づける
     @post.place_id = place_id
   end
 

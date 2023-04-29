@@ -7,9 +7,6 @@ class Public::CustomersController < ApplicationController
     @posts = @customer.posts.order("created_at DESC").page(params[:page])
   end
 
-  def edit
-  end
-
   def index
     @customers = Customer.all.page(params[:page]).per(30)
   end
@@ -19,7 +16,8 @@ class Public::CustomersController < ApplicationController
     redirect_to customer_path(@customer)
   end
 
-  def favorite_posts #ユーザーがいいねした投稿一覧
+  def favorite_posts
+    #ユーザーがいいねした投稿一覧
     @posts = Post.left_joins(:favorites).where("favorites.customer_id LIKE?", "%#{@customer.id}%").page(params[:page])
     @post = Post.new
   end
@@ -35,6 +33,7 @@ private
   end
 
   def is_matching_login_customer
+    # ログインユーザーのIDと特定ページのユーザーIDが一致するか確認
     customer = Customer.find(params[:id])
     unless customer.id == current_customer.id
       redirect_to root_path

@@ -11,10 +11,12 @@ class Public::RelationshipsController < ApplicationController
   end
 
   def followings
+    #フォロー一覧を取得
     @customers = @customer.followings.page(params[:page]).per(30)
   end
 
   def followers
+    #フォロワー一覧を取得
     @customers = @customer.followers.page(params[:page]).per(30)
   end
 
