@@ -1,9 +1,12 @@
+<!--プロフィール部分の部分テンプレート-->
 <div class="card-deck mx-auto col-md-6 fadeIn">
   <div class="card mt-2 mb-2 shadow-sm text-center fadeIn">
+    <!--ユーザーアイコンを表示-->
     <div class="profile-group customer_image">
       <%= image_tag customer.get_profile_image(192, 108), class: "profile_image" %>
     </div>
 
+    <!--ユーザー情報を表示-->
     <div class="profile-group customer_introduction">
       <h5>
         <%= customer.name %>#<%= customer.id %>
@@ -13,12 +16,14 @@
       </5>
     </div>
 
+    <!--自己紹介文を表示-->
     <div class="profile-group customer_introduction">
       <p>
         <%= customer.introduction %>
       </p>
     </div>
 
+    <!--本人ならばユーザー設定ボタン,それ以外ならフォローアンフォローボタンを表示-->
     <div class="profile-group customer_name mx-auto">
       <h5>
         <% if customer != current_customer %>
@@ -31,6 +36,7 @@
       </h5>
     </div>
 
+    <!--フォロー・フォロワー・いいね一覧の各リンクを表示-->
     <div class="profile-group profile_follow btn-group btn-group-sm">
       <%= link_to customer_followings_path(customer), class: 'btn btn-outline-info' do %>
         フォロー : <%= customer.followings.count %>

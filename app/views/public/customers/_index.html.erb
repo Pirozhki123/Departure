@@ -1,3 +1,4 @@
+<!--ユーザー側ユーザー一覧ページ-->
 <div class='scroll-list jscroll-div'>
   <table class='table bg-light fadeIn'>
     <thead>
@@ -9,33 +10,39 @@
     </thead>
 
     <tbody>
+      <!--全てのユーザー取得-->
       <% customers.each do |customer| %>
         <tr>
           <td>
+            <!--リンク付きユーザーアイコンを表示-->
             <%= link_to customer_path(customer) do %>
               <%= image_tag customer.get_profile_image(50, 50), class: "index_profile_image" %>
             <% end %>
           </td>
 
           <td>
+            <!--リンク付きユーザーネームを表示-->
             <%= link_to customer_path(customer) do %>
               <%= customer.name %>
             <% end %>
           </td>
 
           <td>
+            <!--リンク付きフォロー数表示-->
             <%= link_to customer_followings_path(customer) do %>
               フォロー : <%= customer.followings.count %>
             <% end %>
           </td>
 
           <td>
+            <!--リンク付きフォロワー数表示-->
             <%= link_to customer_followers_path(customer) do %>
               フォロワー : <%= customer.followers.count %>
             <% end %>
           </td>
 
           <td>
+            <!--フォローアンフォローボタン-->
             <%= render 'public/relationships/btn', customer: customer %>
           </td>
         </tr>

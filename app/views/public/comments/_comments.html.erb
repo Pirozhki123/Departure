@@ -1,9 +1,13 @@
+<!--コメント表示の部分テンプレート（非同期通信対応）-->
 <% post.comments.each do |comment| %>
   <div class="comment pb-2">
+    <!--リンク付きユーザーアイコン表示-->
     <%= link_to customer_path(comment.customer), class: 'pr-2' do %>
       <%= image_tag comment.customer.get_profile_image(25, 25), class: "img-thumbnail" %>
     <% end %>
+    <!--コメント本文表示-->
     <%= comment.body %>
+    <!--自分のコメントの場合消去ボタンの表示-->
     <% if comment.customer == current_customer %>
       <%= link_to "消去", post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-sm btn-danger", "data-confirm" => "本当に削除しますか？" %>
     <% end %>

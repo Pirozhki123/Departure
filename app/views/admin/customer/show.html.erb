@@ -1,3 +1,4 @@
+<!--ユーザー情報詳細ページ-->
 <div class="container fadeIn">
   <div class="row center-block">
     <div class="col-md-12 text-white">
@@ -30,6 +31,7 @@
         <% end %>
       </div>
 
+      <!--退会状況変更フォーム-->
       <%= form_with model: @customer, url: admin_customer_path do |f| %>
         <div class="form-group">
           <h5>退会設定</h5>
@@ -38,7 +40,7 @@
           <%= f.radio_button :is_deleted, :true %>
           <%= f.label :is_deleted, "退会済み", {value: :true, style: "display: inline-block;"} %>
         </div>
-
+        <!--決定ボタン-->
         <div class="form-group">
           <%= f.submit class: 'btn btn-success' %>
         </div>

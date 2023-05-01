@@ -1,3 +1,4 @@
+<!--管理者側ユーザー一覧ページ-->
 <table class='table bg-light fadeIn'>
 
   <thead>
@@ -12,22 +13,27 @@
   </thead>
 
   <tbody>
+    <!--すべてのユーザーを取得-->
     <% @customers.each do |customer| %>
       <tr>
         <td>
+          <!--リンク付きユーザー画像を表示-->
           <%= link_to admin_customer_path(customer) do %>
             <%= image_tag customer.get_profile_image(50, 50), class: "index_profile_image" %>
           <% end %>
         </td>
         <td>
+          <!--リンク付きユーザーネームを表示-->
           <%= link_to admin_customer_path(customer) do %>
             <%= customer.name %>
           <% end %>
         </td>
         <td>
+          <!--ユーザーのメールアドレスを表示-->
           <%= customer.email %>
         </td>
         <td>
+          <!--ユーザーの退会ステータスを表示-->
           <%= customer.is_deleted %>
         </td>
         <td>
