@@ -12,21 +12,25 @@ class Post < ApplicationRecord
   validates :place_id, presence: true
   validates :introduction, presence: true, length: { maximum: 150 }
 
-  def save_tags(tags) #既存のタグが被らないようにデータベースに保存
-    current_tags = self.tags.pluck(:tag) unless self.tags.nil? #:tagが空じゃなければ配列を取得
+  #タグ毎の保存機能(既存のタグが被らないようにデータベースに保存)
+  def save_tags(tags)
+    #:tagが空じゃなければ配列を取得
+    current_tags = self.tags.pluck(:tag) unless self.tags.nil?
+    #新しいタグと古いタグを選別
     old_tags = current_tags - tags
     new_tags = tags - current_tags
-
-    old_tags.each do |old_tag| #古いタグの削除
+    #古いタグの削除
+    old_tags.each do |old_tag|
       self.tags.delete Tag.find_by(tag: old_tag)
     end
-
-    new_tags.each do |new_tag| #新しいタグの保存
+    #新しいタグの保存
+    new_tags.each do |new_tag|
       post_tag = Tag.find_or_create_by(tag: new_tag)
       self.tags << post_tag
     end
   end
 
+  #画像取得機能
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join("app/assets/images/no_image.jpg")
@@ -35,6 +39,7 @@ class Post < ApplicationRecord
     image.variant(resize_to_limit: [width, height]).processed
   end
 
+  #投稿検索機能
   def self.looks(search, word)
     if search == "perfect_match"
       @post = Post.where("introduction LIKE?", "#{word}")
@@ -49,6 +54,7 @@ class Post < ApplicationRecord
     end
   end
 
+  #いいね有無の判別
   def favorited_by?(customer)
     favorites.exists?(customer_id: customer.id)
   end

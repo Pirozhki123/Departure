@@ -4,6 +4,7 @@ class Tag < ApplicationRecord
 
   validates :tag, presence: true, uniqueness: true
 
+  #タグ検索機能
   def self.looks(search, word)
     if search == "perfect_match"
       tags = Post.left_joins(:tags).where("tags.tag LIKE?", "#{word}")

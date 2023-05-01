@@ -3,6 +3,7 @@ class Place < ApplicationRecord
 
   validates :place_name, presence: true, uniqueness: true, length: { maximum: 50 }
 
+  #場所検索機能
   def self.looks(search, word)
     if search == "perfect_match"
       place = Post.left_joins(:place).where("places.place_name LIKE?", "#{word}")

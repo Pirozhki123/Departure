@@ -21,6 +21,7 @@ class Customer < ApplicationRecord
   validates :name, presence: true, length: { maximum: 30 }
   validates :name, length: { maximum: 150 }
 
+  #ユーザー検索機能
   def self.looks(search, word)
     if search == "perfect_match"
       @customer = Customer.where("name LIKE?", "#{word}")
@@ -35,19 +36,25 @@ class Customer < ApplicationRecord
     end
   end
 
+  #フォロー機能
   def follow(customer)
-    relationships.create(followed_id: customer.id) #渡されたユーザーのIDでフォローをfollowed_idをクリエイト
+    #渡されたユーザーのIDでフォローをfollowed_idをクリエイト
+    relationships.create(followed_id: customer.id)
   end
 
+  #フォロー解除機能
   def unfollow(customer)
-    relationships.find_by(followed_id: customer.id).destroy #渡されたユーザーのIDでfollowed_idを探して削除
+    #渡されたユーザーのIDでfollowed_idを探して削除
+    relationships.find_by(followed_id: customer.id).destroy
   end
 
   def following?(customer)
     followings.include?(customer) #自分がフォローしている人から渡されたユーザー情報を呼び出す？
   end
 
+  #画像取得機能
   def get_profile_image(width, height)
+    #画像が無ければデフォルトイメージを取得
     unless profile_image.attached?
       file_path = Rails.root.join("app/assets/images/no_image.jpg")
       profile_image.attach(io: File.open(file_path), filename: "default-image.jpg", content_type: "image/jpeg")
@@ -55,6 +62,7 @@ class Customer < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
+  #退会機能
   def active_for_authentication?
     super && (is_deleted == false)
   end
