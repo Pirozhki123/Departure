@@ -1,6 +1,8 @@
+<!--投稿詳細画面-->
 <div class="container">
   <div class="row card-deck">
     <div class="mt-2 mb-2 card shadow-sm text-center fadeUp" >
+      <!--写真を表示-->
       <% if @post.image.attached? %>
         <%= image_tag @post.image, class: 'img-fluid fadeIn' %>
       <% else %>
@@ -9,31 +11,39 @@
 
       <div class="card-body">
         <h3 class="card-title">
+          <!--場所名を表示（クリックすると場所名で検索）-->
           <h3 style="display: inline-block;">
             <%= link_to  search_path(word: @post.place.place_name, range:"Place", search: "perfect_match"), class: 'pr-2' do %>
               <%= @post.place.place_name %>
             <% end %>
           </h3>
+          <!--いいねボタンを表示-->
           <h3 style="display: inline-block;" id="favorite_btn_<%= @post.id %>">
             <%= render 'public/favorites/btn', post: @post %>
           </h3>
         </h3>
 
+        <!--投稿日時を表示-->
         <p class="created_at"><%= l @post.created_at %></p>
 
+        <!--タグ情報を表示-->
         <div class="card-item pb-4">
+          <!--投稿に紐づいたタグ一覧を表示（クリックするとタグ検索）-->
           <% post_tags = @post.tags %>
             <% post_tags.each do |tag| %>
               <%= link_to  search_path(word: tag.tag, range:"Tag", search: "perfect_match"), class: 'btn btn-outline-secondary btn-sm pr-2' do %>
               <%= tag.tag %><%= "(#{tag.posts.count})" %>
             <% end %>
           <% end %>
+          <!--タグ編集ボタン（誰でも編集可能）-->
           <%= link_to "タグ編集", edit_post_path(@post), class: 'btn btn-secondary btn-sm' %>
+          <!--投稿削除ボタン（投稿者とログイン中のユーザーが同じ場合表示）-->
           <% if @post.customer == current_customer %>
             <%= link_to "投稿削除", post_path(@post), method: :delete, class: 'btn btn-danger btn-sm', "data-confirm" => "本当に削除しますか？" %>
           <% end %>
         </div>
 
+        <!--説明文,投稿者名,投稿者アイコンを表示-->
         <div class="card-item pb-2">
           <%= @post.introduction %>
           <%= link_to customer_path(@post.customer), class: 'pl-2' do %>
@@ -41,10 +51,12 @@
           <% end %>
         </div>
 
+        <!--コメント一覧を表示-->
         <div class="card-item pb-2" id="comments">
           <%= render 'public/comments/comments', post: @post %>
         </div>
 
+        <!--コメント投稿フォーム-->
         <div class="card-item">
           <%= form_with model: @comment, url: post_comments_path(@post), local: false do |f| %>
             <%= f.text_area :body, rows: '2', placeholder: "コメント", class: "col-md-6" %><br>

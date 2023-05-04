@@ -1,3 +1,4 @@
+<!--投稿フォームの部分テンプレート-->
 <%= form_with model: post, url: posts_path, local: true do |f| %>
   <div class="form-group text-white">
     <%= f.file_field :image, accept: "image/*" %>

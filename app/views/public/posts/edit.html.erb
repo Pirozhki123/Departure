@@ -1,18 +1,23 @@
+<!--投稿編集画面（タグのみ変更可能）-->
 <div class="container">
   <div class="row ">
     <div class="mt-2 mb-2 card shadow-sm text-center fadeUp" >
+      <!--写真を表示-->
       <% if @post.image.attached? %>
         <%= image_tag @post.image, class: 'img-fluid' %>
       <% else %>
         <%= image_tag 'no_image', class: 'img-fluid' %>
       <% end %>
 
+      <!--投稿情報を表示-->
       <div class="card-body">
         <h3 class="card-title">
+          <!--場所名といいねボタンを表示-->
           <%= @post.place.place_name %>
           <%= render 'public/favorites/btn', post: @post %>
         </h3>
 
+        <!--タグ編集フォーム-->
         <div class="card-item pb-4">
           <%= form_with model: @post, url: post_path, method: :patch, local: true do |f| %>
             <div class="form-group">
@@ -24,6 +29,7 @@
           <% end %>
         </div>
 
+        <!--説明文,ユーザーアイコン,ユーザー名を表示-->
         <div class="card-item pb-2">
           <%= @post.introduction %>
           <%= link_to customer_path(@post.customer), class: 'pl-2' do %>
@@ -31,17 +37,21 @@
           <% end %>
         </div>
 
+        <!--コメント一覧を表示-->
         <div class="card-item pb-2">
           <% @post.comments.each do |comment| %>
             <div class="comment pb-2">
+              <!--コメントしたユーザーアイコンと名前を表示-->
               <%= link_to customer_path(comment.customer), class: 'pr-2' do %>
                 <%= image_tag comment.customer.get_profile_image(25, 25), class: "img-thumbnail" %>
               <% end %>
+              <!--コメント本文を表示-->
               <%= comment.body %>
             </div>
           <% end %>
         </div>
 
+        <!--コメント投稿フォーム-->
         <div class="card-item">
           <%= form_with model: @comment, url: post_comments_path(@post) do |f| %>
             <%= f.text_area :body, rows: '2', placeholder: "コメント", class: "col-md-6" %><br>

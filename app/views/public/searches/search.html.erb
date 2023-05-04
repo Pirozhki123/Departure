@@ -1,17 +1,22 @@
+<!--検索ページ-->
 <div class="container px-5 px-sm-0 fadeIn">
   <div class="row">
     <div class="col-md-12">
       <%= render 'layouts/search' %>
       <table class="table table-hover table-inverse">
+        <!--ユーザー検索-->
         <% if @range == "User" %>
           <h2 class="text-white">Users search for "<%="#{@word}"%>"</h2>
           <%= render 'public/customers/index', customers: @customers %>
+        <!--場所検索-->
         <% elsif @range == "Place" %>
           <h2 class="text-white">Place search for "<%="#{@word}"%>"</h2>
           <%= render 'public/posts/index', posts: @posts %>
+        <!--タグ検索-->
         <% elsif @range == "Tag" %>
           <h2 class="text-white">Posts search for "<%="#{@word}"%>"</h2>
           <%= render 'public/posts/index', posts: @posts %>
+        <!--ワード検索-->
         <% elsif @range == "Word" %>
           <h2 class="text-white">Word search for "<%="#{@word}"%>"</h2>
           <%= render 'public/posts/index', posts: @posts %>

@@ -1,24 +1,27 @@
+<!--投稿一覧の部分テンプレート-->
 <div class='scroll-list jscroll-div'>
   <div class="card-deck">
 
+    <!--投稿一覧を取得-->
     <% posts.each do |post| %>
       <div class="col-md-6">
         <div class="card mt-2 mb-2 shadow-sm text-center delay-time02 fadeUp" >
-
+          <!--写真を表示-->
           <%= link_to  post_path(post) do %>
             <%= image_tag post.get_image(836, 600), class: "card-img-top fadeIn" %>
           <% end %>
 
+          <!--投稿情報-->
           <div class="card-body justify-content-center">
-
+            <!--いいねボタンを表示-->
             <h5 style="display: inline-block;" id="favorite_btn_<%= post.id %>">
               <%= render 'public/favorites/btn', post: post %>
             </h5>
-
+            <!--場所名を表示-->
             <h5 style="display: inline-block;" class="card-title text-truncate mb-0">
               <%= post.place.place_name %>
             </h5>
-
+            <!--タグ,投稿日時を表示-->
             <div class="card-item text-truncate">
               <% post_tags = post.tags %>
               <% post_tags.each do |tag| %>
@@ -28,14 +31,14 @@
               <% end %>
               <p class="created_at"><%= l post.created_at %></p>
             </div>
-
+            <!--削除ボタンを表示（投稿者がログイン中のユーザーの場合）-->
             <div class="card-item d-flex justify-content-between align-items-center">
               <div class="btn-group">
                 <% if post.customer == current_customer %>
                   <%= link_to "削除", post_path(post), method: :delete, class: 'btn btn-danger btn-sm', "data-confirm" => "本当に削除しますか？" %>
                 <% end %>
               </div>
-
+              <!--投稿者のアイコンと名前を表示-->
               <%= link_to customer_path(post.customer) do %>
                 <p>
                   <%= post.customer.name %>
@@ -47,8 +50,9 @@
         </div>
       </div>
     <% end %>
-
   </div>
+
+  <!--投稿が存在する場合無限スクロール-->
   <% if posts.present? %>
     <div class="row mx-auto">
       <h3><%= paginate posts %></h3>

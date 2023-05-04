@@ -1,9 +1,13 @@
+<!--トップページ（タイムライン）-->
 <div class="container">
   <div class="row">
     <%= render 'layouts/errors', obj: @post %>
     <div class="col-md-12 mb2">
+      <!--投稿ボタン-->
       <%= render 'public/posts/btn' %>
+      <!--おすすめ投稿-->
       <%= render 'public/posts/recommend', posts: @recommends %>
+      <!--タイムライン-->
       <%= render 'public/posts/index', posts: @posts %>
     </div>
   </div>
